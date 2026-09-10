@@ -27,3 +27,4 @@ Thumbs.db
 
 # Cursor / agent artifacts (optional local)
 .agent-tools/
+.neon

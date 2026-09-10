@@ -1,5 +1,6 @@
 ---
-import menuHtml from '../data/main-menu.html?raw'
+import menuHtmlFallback from '../data/main-menu.html?raw'
+import { getMainMenu, menuItemsToHtml } from '../lib/payload'
 import '../styles/mmenu-custom.css'
 import '../styles/header-mmenu.css'
 
@@ -8,6 +9,10 @@ interface Props {
 }
 
 const { isHome = false } = Astro.props
+
+const menu = await getMainMenu()
+const menuHtml =
+  menu?.items?.length ? menuItemsToHtml(menu.items) : menuHtmlFallback
 ---
 
 <header
@@ -29,7 +34,18 @@ const { isHome = false } = Astro.props
         </a>
       </div>
       <Fragment set:html={menuHtml} />
-      <a href="#menu" id="menu-ham" aria-label="Paradox Marketing Toggle Menu"><span></span></a>
+      <style is:inline>
+        #menu {
+          visibility: hidden;
+          opacity: 0;
+          transition: opacity 0.2s ease;
+        }
+        .mm-wrapper #menu {
+          visibility: visible;
+          opacity: 1;
+        }
+      </style>
+      <a href="#menu" id="menu-ham" aria-label="Paradox Marketing Toggle Menu" aria-controls="menu"><span></span></a>
     </div>
   </div>
 </header>
@@ -68,19 +84,42 @@ const { isHome = false } = Astro.props
     const maxAttempts = 10
     const intervalMs = 2000
     let interval = null
+    let initialized = false
+
+    const cleanupMmenuDom = () => {
+      // Only unwrap the page content — never the off-canvas blocker
+      document.querySelectorAll('.mm-slideout.mm-page').forEach((el) => {
+        if (!el.classList.contains('mm-blocker') && !el.classList.contains('mm-wrapper__blocker')) {
+          el.classList.remove('mm-page')
+        }
+      })
+      document.querySelector('.mm-wrapper #menu')?.classList.remove('mm-hidden')
+      // Keep Let's Talk modal outside .mm-slideout so it can stack above the hero
+      const letsTalk = document.getElementById('letsTalkModal')
+      if (letsTalk && letsTalk.parentElement !== document.body) {
+        document.body.appendChild(letsTalk)
+      }
+    }
 
     const handleMaxAttempts = () => {
       if (attempts >= maxAttempts && interval) {
         clearInterval(interval)
+        console.warn('Mmenu init: max attempts reached.')
       }
     }
 
     const tryInit = () => {
+      if (initialized) return true
+
       attempts++
 
       if (typeof Mmenu === 'undefined') {
-        setTimeout(tryInit, 50)
-        return
+        if (attempts < maxAttempts) {
+          setTimeout(tryInit, 50)
+        } else {
+          handleMaxAttempts()
+        }
+        return false
       }
 
       const menuEl = document.querySelector('#menu')
@@ -105,7 +144,7 @@ const { isHome = false } = Astro.props
             {
               position: 'top',
               content: [
-                "<p>From Complex Challenges To Simple Solutions</p><p>We've Got You Covered</p><a href='#' id='close-menu'></a>",
+                "<p>From Complex Challenges To Simple Solutions</p><p>We've Got You Covered</p><button type='button' id='close-menu' aria-label='Close menu'></button>",
               ],
             },
             {
@@ -123,24 +162,36 @@ const { isHome = false } = Astro.props
 
         m.bind('init:after', () => {
           document.body.classList.add('menu-loaded')
+          cleanupMmenuDom()
         })
 
-        setTimeout(() => {
-          const closeBtn = document.querySelector('#close-menu')
-          if (closeBtn) {
-            closeBtn.addEventListener('click', (e) => {
-              e.preventDefault()
-              api.close()
-            })
+        // Delegated close — works even if navbar content is re-rendered
+        document.addEventListener('click', (e) => {
+          const target = e.target
+          if (!(target instanceof Element)) return
+          const closeBtn = target.closest('#close-menu')
+          if (!closeBtn) return
+          e.preventDefault()
+          e.stopPropagation()
+          api.close()
+        })
+
+        // Backdrop click should always close
+        document.addEventListener('click', (e) => {
+          const target = e.target
+          if (!(target instanceof Element)) return
+          if (target.closest('.mm-wrapper__blocker, .mm-blocker')) {
+            api.close()
           }
-        }, 50)
+        })
 
-        const slideout = document.querySelector('.mm-slideout')
-        if (slideout) slideout.classList.remove('mm-page')
+        // Escape key closes the drawer
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') api.close()
+        })
 
-        const wrapperMenu = document.querySelector('.mm-wrapper #menu')
-        if (wrapperMenu) wrapperMenu.classList.remove('mm-hidden')
-
+        cleanupMmenuDom()
+        initialized = true
         if (interval) clearInterval(interval)
         return true
       } catch (e) {

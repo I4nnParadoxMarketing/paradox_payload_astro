@@ -11,6 +11,16 @@ const {
   <div class="container cta-banner__inner">
     <h2>{title}</h2>
     {description && <p>{description}</p>}
-    {ctaUrl && <a href={ctaUrl} class="btn-talk">{ctaLabel}</a>}
+    {ctaUrl && (
+      <a
+        href={ctaUrl}
+        class="btn-talk"
+        data-lets-talk
+        data-bs-toggle="modal"
+        data-bs-target="#letsTalkModal"
+      >
+        {ctaLabel}
+      </a>
+    )}
   </div>
 </section>

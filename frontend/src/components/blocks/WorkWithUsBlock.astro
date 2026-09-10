@@ -19,7 +19,17 @@ const {
       <div>
         <h3>{subtitle} <span>{subtitleHighlight}</span></h3>
         {bodyHtml && <div set:html={bodyHtml} />}
-        {ctaUrl && <a class="btn-talk" href={ctaUrl}>{ctaLabel}</a>}
+        {ctaUrl && (
+          <a
+            class="btn-talk"
+            href={ctaUrl}
+            data-lets-talk
+            data-bs-toggle="modal"
+            data-bs-target="#letsTalkModal"
+          >
+            {ctaLabel}
+          </a>
+        )}
       </div>
     </div>
   </div>

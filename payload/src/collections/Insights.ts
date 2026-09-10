@@ -1,4 +1,6 @@
 import type { CollectionConfig } from 'payload'
+import { insightContentFields } from '../fields/insightContent'
+import { insightFrontendUrl } from '../lib/frontendUrls'
 
 export const Insights: CollectionConfig = {
   slug: 'insights',
@@ -6,6 +8,12 @@ export const Insights: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'publishedDate', 'capabilityTag', 'status', 'updatedAt'],
+    preview: (doc) => insightFrontendUrl(doc),
+    components: {
+      edit: {
+        beforeDocumentControls: ['/components/ViewPageButton/ViewInsightPageButton'],
+      },
+    },
   },
   access: { read: () => true },
   fields: [
@@ -21,7 +29,7 @@ export const Insights: CollectionConfig = {
       ],
     },
     { name: 'excerpt', type: 'textarea' },
-    { name: 'bodyHtml', type: 'code', admin: { language: 'html' } },
+    ...insightContentFields,
     { name: 'publishedDate', type: 'date' },
     { name: 'imageUrl', type: 'text' },
     { name: 'capabilityTag', type: 'text', admin: { description: 'Related capability slug from live site' } },

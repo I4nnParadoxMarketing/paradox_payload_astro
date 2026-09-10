@@ -1,5 +1,8 @@
 import type { PayloadRequest } from 'payload'
 import config from '@payload-config'
+import fs from 'fs'
+import path from 'path'
+import { fileURLToPath } from 'url'
 import { getPayload } from 'payload'
 
 type PageSeed = {
@@ -101,7 +104,7 @@ const homepageSeed: PageSeed = {
             { text: 'Analytics & event tracking' },
           ],
           ctaLabel: 'Learn More About Websites',
-          ctaUrl: 'https://paradoxmarketing.io/capabilities/digital-brand-development/',
+          ctaUrl: '/capabilities/digital-brand-development/',
         },
         {
           serviceKey: 'ads',
@@ -115,7 +118,7 @@ const homepageSeed: PageSeed = {
             { text: 'Budget optimisation & reporting' },
           ],
           ctaLabel: 'Learn More About Advertising',
-          ctaUrl: 'https://paradoxmarketing.io/capabilities/paid-advertising/',
+          ctaUrl: '/capabilities/paid-advertising/',
         },
         {
           serviceKey: 'crm',
@@ -129,7 +132,7 @@ const homepageSeed: PageSeed = {
             { text: 'Data hygiene & process automation' },
           ],
           ctaLabel: 'Learn More About CRMs',
-          ctaUrl: 'https://paradoxmarketing.io/capabilities/crm-strategy/',
+          ctaUrl: '/capabilities/crm-strategy/',
         },
       ],
     },
@@ -338,26 +341,8 @@ const homepageSeed: PageSeed = {
       blockType: 'insights' as const,
       title: 'Our Digital Marketing',
       titleHighlight: 'Insights',
-      posts: [
-        {
-          title: 'What Social Media Marketing Really Takes to Work',
-          date: 'August 25, 2026',
-          url: 'https://paradoxmarketing.io/blog/',
-          imageUrl: 'https://paradoxmarketing.io/wp-content/uploads/2026/08/Social-Media-Marketing@2x-1024x433.webp',
-        },
-        {
-          title: 'Online Reputation Management: Protecting Your Digital Brand',
-          date: 'August 24, 2026',
-          url: 'https://paradoxmarketing.io/blog/',
-          imageUrl: 'https://paradoxmarketing.io/wp-content/uploads/2026/08/Reputation-Management@2x-1024x433.webp',
-        },
-        {
-          title: 'What Professional Website Design Actually Involves',
-          date: 'August 24, 2026',
-          url: 'https://paradoxmarketing.io/blog/',
-          imageUrl: 'https://paradoxmarketing.io/wp-content/uploads/2026/08/Website-Design-Development@2x-1024x433.webp',
-        },
-      ],
+      useCollection: true,
+      collectionLimit: 3,
     },
   ],
 }
@@ -448,6 +433,19 @@ async function seed() {
   for (const page of innerPageSeeds) {
     await upsertPage(payload, page)
   }
+
+  try {
+    const menuPath = path.resolve(path.dirname(fileURLToPath(import.meta.url)), 'main-menu.json')
+    const menuData = JSON.parse(fs.readFileSync(menuPath, 'utf8')) as { items: unknown[] }
+    await payload.updateGlobal({
+      slug: 'main-menu',
+      data: { items: menuData.items },
+    })
+    console.log(`Seeded Main Menu with ${menuData.items.length} top-level items`)
+  } catch (err) {
+    console.warn('Main Menu seed skipped:', err)
+  }
+
   process.exit(0)
 }
 

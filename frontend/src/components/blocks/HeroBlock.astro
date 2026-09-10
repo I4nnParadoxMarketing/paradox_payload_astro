@@ -27,10 +27,20 @@ const {
   <div class="hero-content">
     <div class="container">
       <div class="hero-grid">
-        <div>
+        <div class="left">
           <h1>{heading} <span>{headingHighlight}</span></h1>
           <p>{description}</p>
-          {ctaUrl && <a class="btn-talk" href={ctaUrl}>{ctaLabel}</a>}
+          {ctaUrl && (
+            <a
+              class="btn-talk hero-btn-book-a-call"
+              href={ctaUrl}
+              data-lets-talk
+              data-bs-toggle="modal"
+              data-bs-target="#letsTalkModal"
+            >
+              {ctaLabel}
+            </a>
+          )}
         </div>
         {triangleImage && (
           <div>

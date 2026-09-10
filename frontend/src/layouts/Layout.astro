@@ -1,6 +1,7 @@
 ---
 import '../styles/paradox.css'
 import Header from '../components/Header.astro'
+import LetsTalkModal from '../components/LetsTalkModal.astro'
 
 interface Props {
   title?: string
@@ -41,5 +42,6 @@ const {
         <p>&copy; {new Date().getFullYear()} Paradox Marketing. All rights reserved.</p>
       </div>
     </footer>
+    <LetsTalkModal />
   </body>
 </html>

@@ -100,8 +100,12 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    'main-menu': MainMenu;
+  };
+  globalsSelect: {
+    'main-menu': MainMenuSelect<false> | MainMenuSelect<true>;
+  };
   locale: null;
   widgets: {
     collections: CollectionsWidget;
@@ -558,6 +562,14 @@ export interface Page {
             blockName?: string | null;
             blockType: 'ctaBanner';
           }
+        | {
+            heading: string;
+            ctaLabel: string;
+            ctaUrl: string;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'callToAction';
+          }
       )[]
     | null;
   meta?: {
@@ -613,6 +625,24 @@ export interface Insight {
   slug: string;
   status?: ('draft' | 'published') | null;
   excerpt?: string | null;
+  /**
+   * Write with the visual editor. Use / or the + menu to insert blocks — including Call To Action (Trusted Advisors banner), callout, quote, CTA button, or image.
+   */
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   bodyHtml?: string | null;
   publishedDate?: string | null;
   imageUrl?: string | null;
@@ -637,6 +667,10 @@ export interface Capability {
   id: number;
   title: string;
   slug: string;
+  /**
+   * Public URL path without leading slash, e.g. capabilities/demand-generation/lead-generation
+   */
+  path?: string | null;
   status?: ('draft' | 'published') | null;
   description?: string | null;
   /**
@@ -648,7 +682,28 @@ export interface Capability {
    * Parent capability for nested pages
    */
   parent?: (number | null) | Capability;
+  /**
+   * Original WordPress URL (optional)
+   */
   url?: string | null;
+  /**
+   * Write with the visual editor. Use / or the + menu to insert blocks — including Call To Action (Trusted Advisors banner), callout, quote, CTA button, or image.
+   */
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   bodyHtml?: string | null;
   wpId?: number | null;
   meta?: {
@@ -1242,6 +1297,15 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        callToAction?:
+          | T
+          | {
+              heading?: T;
+              ctaLabel?: T;
+              ctaUrl?: T;
+              id?: T;
+              blockName?: T;
+            };
       };
   meta?:
     | T
@@ -1292,6 +1356,7 @@ export interface InsightsSelect<T extends boolean = true> {
   slug?: T;
   status?: T;
   excerpt?: T;
+  content?: T;
   bodyHtml?: T;
   publishedDate?: T;
   imageUrl?: T;
@@ -1314,12 +1379,14 @@ export interface InsightsSelect<T extends boolean = true> {
 export interface CapabilitiesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
+  path?: T;
   status?: T;
   description?: T;
   color?: T;
   imageUrl?: T;
   parent?: T;
   url?: T;
+  content?: T;
   bodyHtml?: T;
   wpId?: T;
   meta?:
@@ -1453,6 +1520,83 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   createdAt?: T;
 }
 /**
+ * Site navigation shown in the header (mmenu). Supports up to 3 levels.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "main-menu".
+ */
+export interface MainMenu {
+  id: number;
+  /**
+   * Top-level items (Capabilities, Industries, Insights, Our Team, Our Portfolio).
+   */
+  items?:
+    | {
+        label: string;
+        /**
+         * Use # for parent items that only open a submenu.
+         */
+        url?: string | null;
+        children?:
+          | {
+              label: string;
+              /**
+               * Use # for parent items that only open a submenu.
+               */
+              url?: string | null;
+              /**
+               * Third-level links under this child.
+               */
+              links?:
+                | {
+                    label: string;
+                    /**
+                     * Use # for parent items that only open a submenu.
+                     */
+                    url?: string | null;
+                    id?: string | null;
+                  }[]
+                | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "main-menu_select".
+ */
+export interface MainMenuSelect<T extends boolean = true> {
+  items?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        children?:
+          | T
+          | {
+              label?: T;
+              url?: T;
+              links?:
+                | T
+                | {
+                    label?: T;
+                    url?: T;
+                    id?: T;
+                  };
+              id?: T;
+            };
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "collections_widget".
  */
@@ -1461,6 +1605,21 @@ export interface CollectionsWidget {
     [k: string]: unknown;
   };
   width: 'full';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "InsightCallToActionBlock".
+ */
+export interface InsightCallToActionBlock {
+  /**
+   * Large heading inside the cyan CTA box (matches live insight pages).
+   */
+  heading: string;
+  ctaLabel: string;
+  ctaUrl: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'insightCallToAction';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

@@ -1,14 +1,37 @@
 ---
+const serviceIcons: Record<string, string> = {
+  website: `<svg xmlns="http://www.w3.org/2000/svg" width="39" height="45" viewBox="0 0 39 45" fill="none" aria-hidden="true"> <path d="M34.9706 38.9341C36.1203 40.9039 35.4131 43.4465 33.3832 44.5302C31.5679 45.4996 29.2772 44.9247 28.1368 43.2113C27.3094 41.969 27.2639 40.4591 27.8529 39.2248C27.9328 39.0583 27.8952 38.86 27.7664 38.7272C27.7215 38.681 27.6746 38.6347 27.6257 38.5891C27.326 38.3076 27.0374 38.1193 26.8076 37.9944L19.5849 42.2142L14.0863 39.0014C15.1639 38.525 16.0805 37.7175 16.6919 36.6689C17.4784 35.3215 17.6771 33.7528 17.2519 32.2509C16.8273 30.7502 15.8342 29.5185 14.456 28.7824C13.6425 28.3483 12.7227 28.1183 11.7969 28.1183C9.88256 28.1183 8.11089 29.0619 7.05831 30.6432C6.3128 31.7639 5.99649 33.0656 6.12394 34.3495L0 30.7714L17.1898 1.31033C18.2094 -0.436778 20.7325 -0.436778 21.7521 1.31033L39 30.8712L31.1922 35.4332C31.1737 35.7035 31.181 36.0676 31.286 36.4819C31.2992 36.5314 31.3124 36.5803 31.3269 36.6279C31.3817 36.809 31.5481 36.9299 31.737 36.9418C33.0332 37.0224 34.2674 37.7268 34.9713 38.9341H34.9706Z" fill="#EFB155" /> </svg>`,
+  ads: `<svg xmlns="http://www.w3.org/2000/svg" width="46" height="45" viewBox="0 0 46 45" fill="none" aria-hidden="true"> <path d="M36.8273 25.7151C35.507 27.0859 34.8198 28.8895 34.8924 30.7946C34.9585 32.5095 35.6618 34.1342 36.8725 35.3712C38.0839 36.6083 39.6954 37.3457 41.4102 37.4472C41.5489 37.4553 41.6901 37.4593 41.8288 37.4593C43.3112 37.4593 44.73 36.987 45.8979 36.1425V45H3.23091C0.74026 45 -0.810752 42.3003 0.44506 40.151L22.177 2.96077L31.8073 8.57863C32.096 8.42632 32.4751 8.18777 32.8695 7.81868C32.93 7.76226 32.9873 7.70585 33.0421 7.64944C33.1994 7.48665 33.243 7.24246 33.1454 7.03777C32.4275 5.53398 32.4848 3.69494 33.4938 2.18148C34.8867 0.091809 37.6847 -0.609314 39.9019 0.572926C42.3813 1.89458 43.2451 4.99565 41.8409 7.398C40.9811 8.86956 39.4744 9.72863 37.8904 9.82776C37.6597 9.84146 37.4572 9.98974 37.3895 10.2106C37.3725 10.2686 37.3556 10.3274 37.3403 10.3887C37.2015 10.9318 37.2015 11.4065 37.2298 11.7426L45.8979 16.7987V24.9043C44.7308 24.0598 43.3128 23.5883 41.8288 23.5883C39.9245 23.5883 38.1476 24.3434 36.8273 25.7151Z" fill="#80CBE2" /> </svg>`,
+  crm: `<svg xmlns="http://www.w3.org/2000/svg" width="61" height="45" viewBox="0 0 61 45" fill="none" aria-hidden="true"> <path d="M11.7729 45V32.836C11.4762 32.65 11.0493 32.4259 10.4913 32.2589C10.4076 32.2338 10.3248 32.2113 10.2429 32.1914C10.0075 32.1335 9.75822 32.226 9.62195 32.4268C8.61893 33.9053 6.88801 34.8483 4.94579 34.7324C2.26274 34.5732 0.106636 32.361 0.00400547 29.6669C-0.111562 26.6553 2.28861 24.1767 5.26576 24.1767C7.08982 24.1767 8.69655 25.1076 9.64092 26.5212C9.77891 26.7271 10.0247 26.8353 10.2653 26.7773C10.3283 26.7626 10.3921 26.7462 10.4568 26.7271C11.0372 26.5602 11.4779 26.3015 11.7729 26.0921V14.9879L19.0657 10.7166C18.9199 12.3708 19.3356 14.044 20.2938 15.4879C21.6685 17.5574 23.9816 18.7937 26.4827 18.7937C27.6918 18.7937 28.8923 18.4926 29.9557 17.9242C31.7556 16.9604 33.0519 15.3478 33.6073 13.3822C34.1627 11.4165 33.9031 9.36267 32.876 7.59776C32.0911 6.24985 30.9217 5.20562 29.5469 4.57752L37.3624 0L60.5241 39.7944C61.8669 42.1017 60.2085 45 57.5452 45H11.7729Z" fill="#2F77B5" /> </svg>`,
+}
+
+type Feature = string | { text?: string }
+
+type Service = {
+  serviceKey?: string
+  id?: string
+  title: string
+  color?: string
+  features?: Feature[]
+  ctaLabel?: string
+  ctaUrl?: string
+}
+
 const { services = [] } = Astro.props
-const serviceList = Array.isArray(services) ? services : []
+const serviceList = (Array.isArray(services) ? services : []) as Service[]
 const defaultActive = serviceList[0]?.serviceKey || serviceList[0]?.id || 'website'
+
+function featureText(feature: Feature): string {
+  if (typeof feature === 'string') return feature
+  return feature?.text ?? ''
+}
 ---
 
 <div class="triangle-graphic">
   <div class="container">
     <div class="triangle-grid">
       <div class="text-center">
-        <svg class="triangle-svg" viewBox="0 0 613 532" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg class="triangle-svg" viewBox="0 0 613 532" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Interactive marketing services triangle">
           <g class="triangle-path" data-service="crm">
             <path d="M312.413 526.513V453.86C310.634 452.749 308.074 451.411 304.728 450.414C304.226 450.264 303.73 450.129 303.238 450.011C301.826 449.664 300.332 450.217 299.515 451.416C293.5 460.247 283.121 465.88 271.474 465.187C255.385 464.236 242.456 451.023 241.84 434.932C241.147 416.945 255.54 402.14 273.393 402.14C284.331 402.14 293.965 407.7 299.628 416.144C300.456 417.374 301.93 418.019 303.373 417.673C303.75 417.585 304.133 417.487 304.521 417.374C308.001 416.376 310.644 414.831 312.413 413.581V347.258L356.144 321.746C355.27 331.626 357.763 341.62 363.509 350.244C371.752 362.605 385.623 369.989 400.62 369.989C407.871 369.989 415.07 368.191 421.447 364.796C432.24 359.039 440.013 349.407 443.343 337.667C446.674 325.927 445.117 313.659 438.958 303.118C434.252 295.067 427.239 288.83 418.995 285.079L465.861 257.738L604.751 495.421C612.803 509.203 602.858 526.513 586.888 526.513H312.413Z" fill="#2F77B5" />
           </g>
@@ -21,26 +44,39 @@ const defaultActive = serviceList[0]?.serviceKey || serviceList[0]?.id || 'websi
         </svg>
       </div>
       <div class="skew-stack-wrapper">
-        {serviceList.map((service: { serviceKey?: string; id?: string; title: string; color: string; features?: { text: string }[]; ctaLabel?: string; ctaUrl?: string }, index: number) => {
+        {serviceList.map((service, index) => {
           const key = service.serviceKey || service.id || `service-${index}`
+          const features = (service.features || [])
+            .map(featureText)
+            .filter(Boolean)
+          const icon = serviceIcons[key] || ''
           return (
-          <div
-            id={key}
-            class:list={['skew-card', `card-${key}`, { active: key === defaultActive, 'background-card': key !== defaultActive }]}
-          >
-            <div class="card-body">
-              <h3 style={`color: ${service.color}`}>{service.title}</h3>
-              <hr />
-              <ul>
-                {(service.features || []).map((f: { text: string }) => (
-                  <li>{f.text}</li>
-                ))}
-              </ul>
-              {service.ctaUrl && (
-                <a href={service.ctaUrl} class="btn-talk w-100">{service.ctaLabel}</a>
-              )}
+            <div
+              id={key}
+              class:list={[
+                'skew-card',
+                `card-${key}`,
+                { active: key === defaultActive, 'background-card': key !== defaultActive },
+              ]}
+            >
+              <div class="card-body">
+                <h3 class="card-title">
+                  {icon && <Fragment set:html={icon} />}
+                  {service.title}
+                </h3>
+                <hr />
+                <ul>
+                  {features.map((text) => (
+                    <li>{text}</li>
+                  ))}
+                </ul>
+                {service.ctaUrl && (
+                  <a href={service.ctaUrl} class="btn-talk">
+                    {service.ctaLabel || 'Learn More'}
+                  </a>
+                )}
+              </div>
             </div>
-          </div>
           )
         })}
       </div>
@@ -50,25 +86,23 @@ const defaultActive = serviceList[0]?.serviceKey || serviceList[0]?.id || 'websi
 
 <script>
   function switchSkewCard(serviceName: string) {
-    document.querySelectorAll('.skew-card').forEach((card) => {
+    document.querySelectorAll('.triangle-graphic .skew-card').forEach((card) => {
       card.classList.remove('active')
       card.classList.add('background-card')
     })
     const selected = document.getElementById(serviceName)
     selected?.classList.remove('background-card')
     selected?.classList.add('active')
-    document.querySelectorAll('.triangle-path').forEach((g) => g.classList.remove('active-path'))
-    document.querySelector(`.triangle-path[data-service="${serviceName}"]`)?.classList.add('active-path')
+    document.querySelectorAll('.triangle-graphic .triangle-path').forEach((g) => g.classList.remove('active-path'))
+    document
+      .querySelector(`.triangle-graphic .triangle-path[data-service="${serviceName}"]`)
+      ?.classList.add('active-path')
   }
 
-  document.querySelectorAll('.triangle-path').forEach((group) => {
+  document.querySelectorAll('.triangle-graphic .triangle-path').forEach((group) => {
     group.addEventListener('click', () => {
       const service = group.getAttribute('data-service')
       if (service) switchSkewCard(service)
     })
   })
 </script>
-
-<style>
-  .w-100 { width: 100%; display: block; margin-top: 1rem; }
-</style>

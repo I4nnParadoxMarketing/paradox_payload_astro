@@ -31,7 +31,17 @@ const {
             <a href={`tel:${phoneTel}`}><strong>CALL NOW: {phone}</strong></a>
           </p>
         )}
-        {ctaUrl && <a class="btn-talk" href={ctaUrl}>{ctaLabel}</a>}
+        {ctaUrl && (
+          <a
+            class="btn-talk"
+            href={ctaUrl}
+            data-lets-talk
+            data-bs-toggle="modal"
+            data-bs-target="#letsTalkModal"
+          >
+            {ctaLabel}
+          </a>
+        )}
       </div>
       <div class="contact-form-wrap">
         <div class="contact-form-card contact-form">

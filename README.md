@@ -36,6 +36,12 @@ Payload + Astro/
 | `capabilities` | `capabilities` | Service pages (hierarchical) |
 | `people` | `prdx-people` | Team members |
 
+### Globals
+
+| Global | Purpose |
+|--------|---------|
+| `main-menu` | Header navigation (up to 3 levels). Edit in Admin → **Main Menu**. |
+
 Import from the live site with `npm run import:wordpress`. Page blocks can use **Use collection** to pull from these instead of manual arrays.
 
 ## Setup
@@ -67,15 +73,20 @@ Seed homepage content (after creating an admin user):
 npm run seed
 ```
 
-Import WordPress CPTs (read-only from paradoxmarketing.io):
+Seed / refresh the header navigation from the extracted live-site menu:
 
 ```bash
+npm run seed:menu
+```
+
+Import WordPress CPTs + pages (read-only from paradoxmarketing.io):
+
+```bash
+# Stop Payload first to avoid SQLite locks
 npm run import:wordpress
 ```
 
-Stop the Payload dev server first if it is running, to avoid SQLite schema conflicts during import.
-
-This creates **Portfolio**, **Insights**, **Capabilities**, and **People** entries in Payload from the live site's REST API.
+This imports **Portfolio**, **Insights**, **Capabilities**, **People**, and public **Pages** (as `pageBanner` + `richContent` layouts). Structured pages from `npm run seed` (home, contact-us, our-team, etc.) are left unchanged.
 
 ### Astro frontend
 

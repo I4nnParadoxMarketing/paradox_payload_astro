@@ -180,7 +180,9 @@ a { color: inherit; text-decoration: none; }
 .what-we-do-content p { font-size: 24px; line-height: 34px; }
 
 /* Service triangle */
-.triangle-graphic { padding: 20px 10px 50px; }
+.triangle-graphic {
+  padding: 20px 10px 50px;
+}
 
 .triangle-grid {
   display: grid;
@@ -191,6 +193,8 @@ a { color: inherit; text-decoration: none; }
 
 .skew-stack-wrapper {
   perspective: 1500px;
+  width: 100%;
+  height: 480px;
   min-height: 420px;
   position: relative;
 }
@@ -199,12 +203,17 @@ a { color: inherit; text-decoration: none; }
   position: absolute;
   top: 0;
   left: 0;
-  width: 85%;
+  width: 80%;
+  height: 100%;
   background: #fff;
   border-radius: 20px;
-  box-shadow: -10px -10px 40px rgba(159, 207, 255, 0.15), 10px 10px 40px rgba(159, 207, 255, 0.2);
+  box-shadow:
+    -10px -10px 40px rgba(159, 207, 255, 0.15),
+    10px 10px 40px rgba(159, 207, 255, 0.2);
   opacity: 0;
   visibility: hidden;
+  z-index: 1;
+  transform-origin: top right;
   transform: translate(20px, 10px) rotateY(15deg) skew(-5deg) scale(0.9);
   transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 }
@@ -213,45 +222,190 @@ a { color: inherit; text-decoration: none; }
   opacity: 1;
   visibility: visible;
   z-index: 10;
+  margin-top: 30px;
   transform: translate(0, 0) rotateY(0) skew(0) scale(1);
+  background: #fff;
 }
 
-.skew-card.background-card { opacity: 0.6; visibility: visible; z-index: 5; }
+.skew-card.card-website.background-card {
+  background-color: #fff;
+  transform: translate(5px, -10px) rotateZ(-4deg) skewX(-2deg) scale(0.96);
+  opacity: 0.8;
+  visibility: visible;
+  z-index: 8;
+}
 
-.skew-card .card-body { padding: 2rem; }
+.skew-card.card-ads.background-card {
+  background-color: #fff;
+  transform: translate(20px, -20px) rotateZ(-4deg) skewX(-2deg) scale(0.95);
+  opacity: 0.7;
+  visibility: visible;
+  z-index: 6;
+}
 
-.skew-card h3 { font-size: 32px; margin: 0 0 1rem; display: flex; gap: 12px; align-items: center; }
+.skew-card.card-crm.background-card {
+  background-color: #fff;
+  transform: translate(50px, -40px) rotateZ(-4deg) skewX(-2deg) scale(0.93);
+  opacity: 0.5;
+  visibility: visible;
+  z-index: 4;
+}
 
-.skew-card ul { list-style: none; padding: 0; margin: 1.5rem 0; }
+.skew-card .card-body {
+  padding: 2.5rem;
+}
+
+.skew-card .card-title {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  font-size: 40px;
+  font-weight: 510;
+  line-height: 48px;
+  color: #323232 !important;
+  text-transform: capitalize;
+  margin: 0 0 1rem;
+}
+
+.skew-card .card-title svg {
+  flex-shrink: 0;
+}
+
+.skew-card hr {
+  border: 0;
+  border-top: 1px solid #e5e5e5;
+  margin: 0 0 0.5rem;
+}
+
+.skew-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0 !important;
+}
 
 .skew-card li {
   position: relative;
   padding-left: 32px;
   margin-bottom: 1rem;
+  display: flex;
+  align-items: flex-start;
   line-height: 1.4;
+  color: #323232;
+  font-size: 16px;
 }
 
 .skew-card li::before {
-  content: "✓";
+  content: "";
   position: absolute;
   left: 0;
-  top: 0;
+  top: 2px;
   width: 20px;
   height: 20px;
-  border: 2px solid var(--pdx-text);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23323232' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'%3E%3C/circle%3E%3Cpolyline points='16 8 10 14 8 12'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: 0;
+  border-radius: 0;
+  font-size: 0;
 }
 
-.triangle-svg { max-width: 450px; width: 100%; cursor: pointer; }
+.triangle-graphic .btn-talk {
+  width: 100%;
+  display: block;
+  margin-top: 1.5rem;
+  text-align: center;
+  border-radius: 5px;
+  background: #efb155;
+  padding: 10px 30px;
+  color: #323232 !important;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 26px;
+}
 
-.triangle-svg .triangle-path { opacity: 0.4; transition: opacity 0.3s; }
+.triangle-svg {
+  max-width: 450px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.triangle-svg .triangle-path {
+  opacity: 0.4;
+  transition: opacity 0.3s;
+  cursor: pointer;
+}
 
 .triangle-svg .triangle-path:hover,
-.triangle-svg .triangle-path.active-path { opacity: 1; }
+.triangle-svg .triangle-path.active-path {
+  opacity: 1;
+}
+
+@media (max-width: 1800px) {
+  .skew-card .card-title {
+    font-size: 30px;
+    line-height: 38px;
+  }
+
+  .triangle-graphic .btn-talk {
+    padding: 8px 40px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .skew-card {
+    width: 90%;
+  }
+
+  .triangle-graphic {
+    padding: 0 10px 50px;
+  }
+}
+
+@media (max-width: 600px) {
+  .skew-stack-wrapper {
+    perspective: none;
+    height: auto;
+    min-height: 400px;
+  }
+
+  .skew-card {
+    width: 100%;
+    height: auto;
+    transform: none;
+    transform-origin: center;
+  }
+
+  .skew-card.card-website.background-card,
+  .skew-card.card-ads.background-card,
+  .skew-card.card-crm.background-card {
+    transform: none;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .skew-card.active {
+    position: relative;
+    margin-top: 0;
+    opacity: 1;
+    visibility: visible;
+    z-index: 10;
+  }
+
+  .skew-card .card-title {
+    font-size: 24px;
+    line-height: 32px;
+    gap: 10px;
+  }
+
+  .skew-card .card-body {
+    padding: 2rem;
+  }
+}
 
 /* Problems */
 .problems { padding: 60px 10px; }
@@ -550,46 +704,405 @@ a { color: inherit; text-decoration: none; }
   background-size: contain;
 }
 
-/* Insights */
-.insights-section { padding: 60px 10px; }
+/* Insights (homepage) — matches live paradoxmarketing.io */
+.insights-section {
+  padding: 0 15px 80px;
+  background-color: #fff;
+  text-align: center;
+}
+
+.insights-section h2 {
+  color: #323232;
+  text-align: center;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 48px;
+  text-transform: capitalize;
+  margin: 0 0 50px;
+}
+
+.insights-section h2 span {
+  color: #2f77b5;
+  font-weight: 700;
+}
 
 .insights-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  margin-top: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+  max-width: 1300px;
+  margin: 0 auto;
 }
 
 .insight-card {
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid #eee;
+  background: #fff;
+  border-radius: 20px;
+  padding: 20px;
+  text-align: left;
+  text-decoration: none !important;
+  color: inherit;
   display: flex;
   flex-direction: column;
-  transition: box-shadow 0.3s;
+  transition: transform 0.3s ease;
+  box-shadow:
+    -8px -8px 30px 0 rgba(159, 207, 255, 0.15),
+    8px 8px 30px 0 rgba(159, 207, 255, 0.15);
+}
+
+.insight-card:hover {
+  transform: translateY(-5px);
   text-decoration: none;
-  color: inherit;
 }
 
-.insight-card:hover { box-shadow: 0 8px 24px rgba(47, 119, 181, 0.12); }
-
-.insight-image {
-  aspect-ratio: 1024 / 433;
-  overflow: hidden;
-}
-
-.insight-image img {
+.insight-thumb {
   width: 100%;
-  height: 100%;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  padding: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(159, 207, 255, 0.5);
+}
+
+.insight-thumb img {
+  width: 100%;
+  height: 200px !important;
   object-fit: cover;
+  border-radius: 12px;
+  object-position: center;
   display: block;
 }
 
-.insight-body { padding: 24px; }
+.insight-card h3 {
+  margin: 0 0 15px;
+  color: #323232;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 26px;
+  text-transform: capitalize;
+}
 
-.insight-card h3 { font-size: 22px; margin: 0 0 12px; }
+.insight-excerpt {
+  color: #323232;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 26px;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
-.insight-date { color: var(--pdx-muted); font-size: 14px; }
+.insight-footer {
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid #bcbcbc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.insight-date {
+  color: #323232;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.insight-link {
+  width: 40px;
+  height: 40px;
+  background-color: #323232;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.insight-link svg {
+  width: 18px;
+  height: 18px;
+}
+
+.insight-card:hover .insight-link {
+  background-color: #2f77b5;
+  transform: rotate(45deg);
+}
+
+@media (max-width: 1800px) {
+  .insight-card h3,
+  .insight-excerpt {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+@media (max-width: 500px) {
+  .insights-section {
+    padding: 0 10px 50px;
+  }
+
+  .insights-section h2 {
+    font-size: 30px;
+    line-height: 40px;
+  }
+
+  .insights-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Keep legacy class names from earlier markup harmless */
+.insight-image,
+.insight-body {
+  display: contents;
+}
+
+/* Live-site style insight / inner page banner */
+.page-inner-banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  min-height: 420px;
+  background-color: #001523;
+  background-size: cover;
+  position: relative;
+  text-align: center;
+}
+
+.page-inner-banner-content {
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+.page-inner-title-banner {
+  color: #fff !important;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 1.1;
+  margin: 0 0 28px;
+}
+
+.page-inner-banner-desc {
+  color: #fff;
+  font-size: 18px;
+  line-height: 1.55;
+  margin: 0 auto;
+  max-width: 920px;
+}
+
+@media (min-width: 1200px) {
+  .page-inner-banner { min-height: 500px; }
+  .page-inner-title-banner {
+    font-size: 64px;
+    line-height: 67px;
+    margin-bottom: 44px;
+  }
+  .page-inner-banner-desc {
+    font-size: 20px;
+    line-height: 31px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .page-inner-banner { min-height: 600px; }
+}
+
+@media (max-width: 767px) {
+  .page-inner-banner {
+    min-height: 320px;
+    padding: 100px 16px 48px;
+  }
+  .page-inner-banner-content { max-width: 100%; }
+  .page-inner-title-banner {
+    font-size: 36px;
+    line-height: 44px;
+    margin-bottom: 20px;
+  }
+  .page-inner-banner-desc {
+    font-size: 16px;
+    line-height: 26px;
+  }
+}
+
+/* Insight article template */
+.post-content {
+  padding: 100px 20px 60px;
+}
+
+.insight-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr);
+  gap: 40px;
+  align-items: start;
+}
+
+.article-content {
+  margin-bottom: 40px;
+  padding-right: 20px;
+  min-width: 0;
+}
+
+.article-content .article-title {
+  font-size: 40px;
+  line-height: 48px;
+  font-weight: 700;
+  color: #122c4e;
+  margin: 0 0 19px;
+}
+
+.article-content .article-excerpt {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #444;
+  margin: 0 0 28px;
+}
+
+.article-content .post-meta ul {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 0 43px;
+  padding: 0;
+  list-style: none;
+  color: #555;
+  font-size: 16px;
+}
+
+.article-content .post-meta ul li {
+  display: inline-flex;
+  align-items: center;
+}
+
+.article-content .post-meta ul li:not(:last-child)::after {
+  content: "|";
+  margin: 0 12px;
+  color: #9aa3af;
+}
+
+.article-content .post-meta a {
+  color: #2f77b5;
+  text-decoration: underline;
+}
+
+.article-content .post-thumbnail {
+  margin-bottom: 40px;
+}
+
+.article-content .post-thumbnail img {
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  display: block;
+}
+
+.article-content .article-body a {
+  color: #212121;
+  text-decoration: underline;
+  font-weight: 400;
+}
+
+.article-content .article-body a:hover {
+  color: #82c9df;
+}
+
+.article-content .article-body h2,
+.article-content .article-body h3 {
+  color: #122c4e;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.insight-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.insight-sidebar .sidebar-heading {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 24px;
+  color: #122c4e;
+}
+
+.social-share-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.social-share-button {
+  color: #fff !important;
+  background: #82c9df;
+  width: 40px;
+  height: 40px;
+  border-radius: 100px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none !important;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.social-share-button:hover {
+  background: #2f77b5;
+}
+
+.recent-posts-widget ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.recent-posts-widget a {
+  color: #141414;
+  font-weight: 400;
+  line-height: 1.4;
+  text-decoration: underline;
+}
+
+.recent-posts-widget a:hover {
+  color: #82c9df;
+}
+
+.recent-posts-widget .recent-date {
+  display: block;
+  margin-top: 4px;
+  color: var(--pdx-muted);
+  font-size: 13px;
+}
+
+@media (max-width: 991px) {
+  .post-content { padding: 40px 16px 40px; }
+  .insight-layout {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .article-content {
+    padding-right: 0;
+    order: 1;
+  }
+  .insight-sidebar {
+    order: 0;
+    gap: 20px;
+    padding: 20px;
+    background: #f1f1f1;
+    border-radius: 20px;
+  }
+  .article-content .article-title {
+    font-size: 32px;
+    line-height: 40px;
+  }
+}
 
 /* Inner pages */
 .page-banner {
@@ -925,6 +1438,49 @@ main:has(.contact-section) + .site-footer {
   margin-bottom: 16px;
 }
 
+.rich-content__body h3 {
+  font-size: 22px;
+  margin: 28px 0 12px;
+}
+
+.rich-content__body ul,
+.rich-content__body ol {
+  margin: 0 0 16px 1.25rem;
+  font-size: 18px;
+  line-height: 1.65;
+}
+
+.rich-content__body img,
+.article-hero-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.article-hero-image {
+  margin: -20px auto 0;
+  padding: 0 20px 20px;
+  max-width: 960px;
+}
+
+.rich-content__body .insight-image {
+  margin: 24px 0;
+}
+
+.rich-content__body .insight-callout {
+  background: #f5f8fc;
+  border-left: 4px solid var(--pdx-blue);
+  padding: 16px 20px;
+  margin: 24px 0;
+}
+
+.rich-content__body .insight-quote {
+  margin: 28px 0;
+  padding-left: 20px;
+  border-left: 3px solid var(--pdx-gold);
+  font-size: 20px;
+}
+
 .capabilities-grid-section { padding: 60px 20px; }
 
 .capabilities-grid {
@@ -1045,6 +1601,85 @@ main:has(.contact-section) + .site-footer {
   opacity: 0.9;
 }
 
+/* Call To Action — live insight footer style */
+.call-to-action {
+  padding: 0 20px 80px;
+}
+
+.call-to-action--inline {
+  padding: 40px 0 20px;
+  margin: 32px 0;
+}
+
+.call-to-action-col {
+  background: radial-gradient(circle, #b0d8e5, #82c9df);
+  color: #141414;
+  border-radius: 20px;
+  padding: 40px;
+  text-align: center;
+}
+
+.call-to-action .cta-heading {
+  font-size: 32px;
+  line-height: 42px;
+  font-weight: 500;
+  margin: 0 auto 24px;
+  max-width: 900px;
+  color: #141414;
+}
+
+.call-to-action__btn-wrap {
+  text-align: center;
+}
+
+.call-to-action__btn {
+  display: inline-block;
+  min-width: 220px;
+  margin-top: 20px;
+}
+
+.call-to-action__btn:hover {
+  text-decoration: none;
+  color: #323232 !important;
+}
+
+@media (min-width: 1200px) {
+  .call-to-action .cta-heading {
+    font-size: 50px;
+    line-height: 58px;
+  }
+
+  .call-to-action-col {
+    padding: 70px 100px;
+  }
+
+  .call-to-action__btn {
+    min-width: 320px;
+    margin-top: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .call-to-action {
+    padding: 0 16px 50px;
+  }
+
+  .call-to-action .cta-heading {
+    font-size: 28px;
+    line-height: 36px;
+  }
+
+  .call-to-action-col {
+    padding: 32px 24px;
+  }
+
+  .call-to-action__btn {
+    min-width: 0;
+    width: 100%;
+    max-width: 320px;
+  }
+}
+
 .preview-bar {
   background: var(--pdx-gold);
   color: var(--pdx-text);
@@ -1066,17 +1701,233 @@ main:has(.contact-section) + .site-footer {
 }
 
 @media (max-width: 992px) {
-  .hero-grid, .triangle-grid, .what-we-do-content .content-grid, .work-grid, .who-we-are-content { grid-template-columns: 1fr; }
-  .what-we-do-content .left-col, .work-with-us .left-col { border-right: none; padding-right: 0; text-align: center; }
-  .problems-grid { grid-template-columns: repeat(2, 1fr); }
-  .metrics-grid, .reviews-grid, .portfolio-grid, .insights-grid { grid-template-columns: 1fr; }
-  .hero-content h1 { font-size: 36px; line-height: 44px; }
+  .hero-video { min-height: 0; height: auto; }
+  .hero-content { padding: 110px 0 50px; }
+  .hero-grid,
+  .triangle-grid,
+  .what-we-do-content .content-grid,
+  .work-grid,
+  .who-we-are-content { grid-template-columns: 1fr; }
+  .hero-content .left { text-align: center; }
+  .hero-content h1 {
+    font-size: 36px;
+    line-height: 44px;
+    margin-left: auto;
+    margin-right: auto;
+  }
   .hero-content h1 span { font-size: 44px; line-height: 52px; }
+  .hero-content p {
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-content .btn-talk,
+  .hero-content .hero-btn-book-a-call {
+    min-width: min(100%, 320px);
+  }
+  .hero-grid > div:last-child {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  .hero-grid > div:last-child img {
+    display: block;
+    margin: 30px auto 0;
+    max-width: min(100%, 420px);
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: contain;
+  }
+  .triangle-grid > div:first-child,
+  .triangle-graphic .text-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+  }
+  .triangle-graphic .triangle-svg {
+    display: block;
+    margin: 0 auto 24px;
+    max-width: min(100%, 420px);
+  }
+  .triangle-graphic .skew-stack-wrapper {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .triangle-graphic .skew-card {
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .what-we-do-content .left-col,
+  .work-with-us .left-col { border-right: none; padding-right: 0; text-align: center; }
+  .problems-grid { grid-template-columns: repeat(2, 1fr); }
+  .metrics-grid,
+  .reviews-grid,
+  .portfolio-grid,
+  .insights-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  .container { padding: 0 12px; }
+
+  .hero-content .left { text-align: center; }
+  .hero-content p { max-width: 500px; margin-left: auto; margin-right: auto; }
+  .hero-content .btn-talk,
+  .hero-content .hero-btn-book-a-call {
+    display: block;
+    width: 100%;
+    min-width: 100% !important;
+    box-sizing: border-box;
+  }
+
+  .what-we-do { padding: 50px 10px; }
+  .what-we-do .container-inner { gap: 0; }
+  .what-we-do-content { text-align: center; }
+  .what-we-do-content h2 { margin-bottom: 20px; }
+  .what-we-do-content p { font-size: 20px; line-height: 29px; }
+
+  .logos p { margin-bottom: 30px; }
+  .logos-marquee { height: 40px; }
+  .logos-track { gap: 30px; }
+  .logos-track img { height: 25px; }
+
+  .problems { padding: 50px 10px; }
+  .problems h2,
+  .problems .section-title { text-align: center; }
+  .problem-card { padding: 30px 15px; }
+
+  .work-with-us { padding: 50px 10px; }
+  .work-with-us .left-col,
+  .work-with-us .right-col,
+  .work-with-us .left,
+  .work-with-us .right { text-align: center; border: none; padding: 0 10px; }
+  .work-with-us h2,
+  .work-with-us .section-title { font-size: 40px; max-width: 100%; }
+  .work-with-us h3 { font-size: 24px; line-height: 32px; }
+
+  .who-we-are { padding: 50px 10px; }
+  .who-we-are-content .left,
+  .who-we-are-content .right,
+  .who-we-are-content .left-col,
+  .who-we-are-content .right-col {
+    text-align: center;
+    border: none;
+    padding: 0 10px;
+    justify-content: center;
+  }
+
+  .reviews .container,
+  .testimonials .container { padding: 50px 20px; }
+
+  .insights-section { padding: 0 10px 50px; }
+
+  .triangle-graphic .skew-card,
+  .skew-card {
+    width: 90%;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .triangle-graphic .skew-stack-wrapper,
+  .skew-stack-wrapper {
+    perspective: none;
+    height: auto;
+    min-height: 400px;
+  }
+
+  .triangle-graphic .skew-card,
+  .skew-card {
+    width: 100%;
+    height: auto;
+    transform: none !important;
+    transform-origin: center;
+  }
+
+  .triangle-graphic .skew-card.background-card,
+  .skew-card.card-website.background-card,
+  .skew-card.card-ads.background-card,
+  .skew-card.card-crm.background-card {
+    transform: none !important;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .triangle-graphic .skew-card.active,
+  .skew-card.active {
+    position: relative;
+    margin-top: 0;
+    opacity: 1;
+    visibility: visible;
+    z-index: 10;
+  }
+
+  .triangle-graphic .card-title,
+  .skew-card .card-title {
+    font-size: 24px;
+    line-height: 32px;
+    gap: 10px;
+  }
+
+  .triangle-graphic .card-body,
+  .skew-card .card-body {
+    padding: 2rem;
+  }
 }
 
 @media (max-width: 500px) {
   .problems-grid { grid-template-columns: 1fr; }
   .section-title { font-size: 30px; line-height: 40px; }
+
+  .hero-content h1 { font-size: 30px; line-height: 39px; }
+  .hero-content h1 span { font-size: 36px; line-height: 44px; }
+  .hero-content p { font-size: 14px; line-height: 22px; }
+  .hero-content { padding: 90px 0 40px; }
+
+  .what-we-do { padding: 30px 15px; }
+  .what-we-do .container-inner { gap: 20px; }
+  .what-we-do h2,
+  .what-we-do h2 span,
+  .what-we-do-content h2,
+  .what-we-do-content h2 span { font-size: 30px; line-height: 40px; }
+
+  .logos p { margin-bottom: 30px; font-size: 20px; }
+  .logos-track { gap: 20px; }
+  .logos-track img { height: 25px !important; }
+  .marquee-track { gap: 20px !important; }
+  .marquee-track img { height: 25px !important; }
+
+  .problems { padding: 40px 10px; }
+  .problem-card img { height: 80px; }
+
+  .work-with-us h2,
+  .work-with-us .section-title {
+    font-size: 30px;
+    line-height: 40px;
+    padding-left: 10px;
+  }
+
+  .who-we-are-content h2,
+  .who-we-are-content h2 span { font-size: 30px; line-height: 40px; }
+  .map-img img { height: auto; margin: 30px 0; }
+
+  .reviews h2,
+  .testimonials h2,
+  .insights-section h2,
+  .insights-section .section-title { font-size: 30px; line-height: 40px; }
+
+  .insights-section { padding: 0 10px 50px; }
+
+  .tech-row-card { padding: 60px 40px 40px !important; }
+
   .contact-form-card { padding: 30px; }
   .contact-form .hbspt-form label,
   .contact-form-card .hbspt-form label { font-size: 18px; }

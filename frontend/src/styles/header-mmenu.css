@@ -3,7 +3,7 @@
   background-color: #001523;
   position: fixed;
   top: 0;
-  z-index: 9999;
+  z-index: 9998;
   width: 100%;
   min-height: 90px;
 }
@@ -24,25 +24,36 @@
   min-height: 90px;
 }
 
+#menu-ham {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
 .header2026 .site-logo {
-  height: 70px;
-  width: 300px;
+  height: 50px;
+  width: auto;
+  max-width: min(250px, 60vw);
   display: flex;
   align-items: center;
-  overflow: hidden;
-  min-width: 180px;
+  overflow: visible;
+  min-width: 0;
+  flex: 0 1 auto;
 }
 
 .header2026 .logo-link {
   display: block;
+  max-width: 100%;
 }
 
 .header2026 .logo-img {
-  max-height: 100px;
   height: 40px;
-  width: 350px;
+  width: auto;
+  max-width: 100%;
+  max-height: 50px;
   aspect-ratio: 250 / 50;
   display: block;
+  object-fit: contain;
+  object-position: left center;
 }
 
 .header-spacer {
@@ -50,20 +61,25 @@
   width: 100%;
 }
 
-/* Prevent flicker before mmenu init */
-#menu {
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity 0.2s ease;
+/* Homepage: no spacer — hero sits under the transparent fixed header */
+.home .header-spacer {
+  display: none;
 }
 
-.mm-wrapper #menu {
-  visibility: visible;
-  opacity: 1;
+.home .hero-video {
+  margin-top: 0;
 }
 
 .mm-slideout {
   z-index: 2;
+}
+
+.main-navigation-wrapper {
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .mm-navbars--top .mm-navbar span p:first-child {
@@ -75,8 +91,19 @@
   color: #efb155 !important;
 }
 
-.mm-wrapper #menu {
+.mm-wrapper #menu,
+.mm-menu.mm-menu--theme-white {
+  --mm-color-background: transparent !important;
+  --mm-color-background-highlight: transparent !important;
+  --mm-color-background-emphasis: transparent !important;
   background: #01162b !important;
+}
+
+.mm-menu .mm-panel,
+.mm-menu .mm-panels,
+.mm-menu .mm-listitem__text,
+.mm-menu .mm-listitem__btn {
+  background: transparent !important;
 }
 
 .mm-menu a {
@@ -103,11 +130,14 @@ a.mm-listitem__text {
 
 .mm-navbars--top .mm-navbar:first-child {
   border-bottom: 1px solid #fff !important;
+  position: relative !important;
+  overflow: visible !important;
 }
 
 #close-menu:before,
 #close-menu:after {
-  height: 20px !important;
+  display: none !important;
+  content: none !important;
 }
 
 @media (max-width: 1800px) {
@@ -129,15 +159,38 @@ a.mm-listitem__text {
 
   .header-content {
     min-height: 60px !important;
+    padding: 8px 0;
+    gap: 12px;
   }
 
   .header-spacer {
     height: 60px !important;
+  }
+
+  .header2026 .site-logo {
+    height: 40px;
+    max-width: min(180px, 58vw);
+  }
+
+  .header2026 .logo-img {
+    height: 34px;
+    max-height: 40px;
+  }
+
+  .header2026 .container {
+    padding-left: 12px;
+    padding-right: 12px;
   }
 }
 
 @media (max-width: 768px) {
   a.hero-btn-book-a-call {
     min-width: 100% !important;
+  }
+}
+
+@media (max-width: 1800px) {
+  a.hero-btn-book-a-call {
+    font-size: 16px !important;
   }
 }

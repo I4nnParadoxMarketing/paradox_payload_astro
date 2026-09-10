@@ -1,22 +1,41 @@
 ---
+type InsightPost = {
+  title: string
+  date?: string
+  url?: string
+  imageUrl?: string
+  excerpt?: string
+}
+
 const { title = '', titleHighlight = '', posts = [] } = Astro.props
-const postList = Array.isArray(posts) ? posts : []
+const postList = (Array.isArray(posts) ? posts : []) as InsightPost[]
+
+const arrowSvg = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`
 ---
 
 <section class="insights-section">
   <div class="container">
-    <h2 class="section-title">{title} <span>{titleHighlight}</span></h2>
+    <h2>{title} {titleHighlight && <span>{titleHighlight}</span>}</h2>
     <div class="insights-grid">
-      {postList.map((post: { title: string; date?: string; url?: string; imageUrl?: string }) => (
+      {postList.map((post) => (
         <a href={post.url || '#'} class="insight-card">
           {post.imageUrl && (
-            <div class="insight-image">
-              <img src={post.imageUrl} alt={post.title} loading="lazy" decoding="async" />
+            <div class="insight-thumb">
+              <img
+                src={post.imageUrl}
+                alt={post.title}
+                loading="lazy"
+                decoding="async"
+                width="400"
+                height="250"
+              />
             </div>
           )}
-          <div class="insight-body">
-            <h3>{post.title}</h3>
+          <h3>{post.title}</h3>
+          {post.excerpt && <p class="insight-excerpt">{post.excerpt}</p>}
+          <div class="insight-footer">
             {post.date && <span class="insight-date">{post.date}</span>}
+            <div class="insight-link" set:html={arrowSvg} />
           </div>
         </a>
       ))}

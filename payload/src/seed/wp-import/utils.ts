@@ -92,6 +92,18 @@ export function capabilityTagFromLink(link: string): string | undefined {
   return match?.[1]
 }
 
+/** Store as capabilities/parent/child (no leading/trailing slash). */
+export function capabilityPathFromLink(link: string | undefined): string | undefined {
+  if (!link) return undefined
+  try {
+    const pathname = new URL(link).pathname.replace(/^\/+|\/+$/g, '')
+    if (!pathname.startsWith('capabilities/')) return undefined
+    return pathname
+  } catch {
+    return undefined
+  }
+}
+
 export function yoastImageUrl(post: WPPost): string | undefined {
   const images = post.yoast_head_json?.og_image
   if (!Array.isArray(images) || !images[0]) return undefined

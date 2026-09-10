@@ -121,13 +121,21 @@ async function hydrateBlock(block: PageBlock): Promise<PageBlock> {
 
     return {
       ...block,
-      posts: docs.map((doc) => ({
-        title: doc.title,
-        excerpt: doc.excerpt,
-        date: formatDate(doc.publishedDate),
-        url: doc.url ?? `/insights/${doc.slug}`,
-        imageUrl: doc.imageUrl,
-      })),
+      posts: docs.map((doc) => {
+        const slug = String(doc.slug || '')
+        const tag = typeof doc.capabilityTag === 'string' ? doc.capabilityTag.trim() : ''
+        const localUrl = tag && slug ? `/capabilities/${tag}/insights/${slug}` : slug ? `/insights/${slug}` : '#'
+        const excerptRaw = typeof doc.excerpt === 'string' ? doc.excerpt.replace(/\s+/g, ' ').trim() : ''
+        const excerpt =
+          excerptRaw.length > 180 ? `${excerptRaw.slice(0, 180).trim()}...` : excerptRaw || undefined
+        return {
+          title: doc.title,
+          excerpt,
+          date: formatDate(doc.publishedDate),
+          url: localUrl,
+          imageUrl: doc.imageUrl,
+        }
+      }),
     }
   }
 
@@ -145,12 +153,22 @@ async function hydrateBlock(block: PageBlock): Promise<PageBlock> {
 
     return {
       ...block,
-      items: docs.map((doc) => ({
-        title: doc.title,
-        description: doc.description,
-        url: doc.url ?? `/capabilities/${doc.slug}`,
-        color: doc.color,
-      })),
+      items: docs.map((doc) => {
+        const path =
+          typeof doc.path === 'string' && doc.path
+            ? `/${String(doc.path).replace(/^\/+|\/+$/g, '')}`
+            : doc.slug
+              ? `/capabilities/${doc.slug}`
+              : typeof doc.url === 'string'
+                ? doc.url
+                : '#'
+        return {
+          title: doc.title,
+          description: doc.description,
+          url: path,
+          color: doc.color,
+        }
+      }),
     }
   }
 
@@ -236,10 +254,38 @@ export async function getInsightItem(slug: string) {
       'where[slug][equals]': slug,
       'where[status][equals]': 'published',
       limit: '1',
+      // depth>=1 so Lexical upload nodes populate and bodyHtml includes <img>
+      depth: '2',
     })
     return docs[0] ?? null
   } catch {
     return null
+  }
+}
+
+export async function getRecentInsights(limit = 5, excludeSlug?: string) {
+  try {
+    const docs = await fetchCollection('insights', {
+      'where[status][equals]': 'published',
+      limit: String(limit + (excludeSlug ? 3 : 0)),
+      sort: '-publishedDate',
+      depth: '0',
+    })
+    return docs
+      .filter((doc) => !excludeSlug || doc.slug !== excludeSlug)
+      .slice(0, limit)
+      .map((doc) => {
+        const slug = String(doc.slug || '')
+        const tag = typeof doc.capabilityTag === 'string' ? doc.capabilityTag.trim() : ''
+        const url = tag && slug ? `/capabilities/${tag}/insights/${slug}` : slug ? `/insights/${slug}` : '#'
+        return {
+          title: String(doc.title || slug),
+          url,
+          date: formatDate(doc.publishedDate),
+        }
+      })
+  } catch {
+    return []
   }
 }
 
@@ -249,9 +295,31 @@ export async function getCapabilityItem(slug: string) {
       'where[slug][equals]': slug,
       'where[status][equals]': 'published',
       limit: '1',
-      depth: '1',
+      depth: '2',
     })
     return docs[0] ?? null
+  } catch {
+    return null
+  }
+}
+
+/** Resolve by full path e.g. capabilities/demand-generation/lead-generation */
+export async function getCapabilityByPath(path: string) {
+  const normalized = path.replace(/^\/+|\/+$/g, '')
+  if (!normalized) return null
+  try {
+    const docs = await fetchCollection('capabilities', {
+      'where[path][equals]': normalized,
+      'where[status][equals]': 'published',
+      limit: '1',
+      depth: '2',
+    })
+    if (docs[0]) return docs[0]
+
+    // Fallback: leaf slug (unique)
+    const leaf = normalized.split('/').filter(Boolean).pop()
+    if (!leaf || leaf === 'capabilities') return null
+    return getCapabilityItem(leaf)
   } catch {
     return null
   }
@@ -268,6 +336,78 @@ export async function getPersonItem(slug: string) {
   } catch {
     return null
   }
+}
+
+export type MenuItem = {
+  id?: string
+  label: string
+  url?: string | null
+  children?: MenuItem[] | null
+  /** Third-level links (Payload field name to avoid nested `children` collision). */
+  links?: MenuItem[] | null
+}
+
+export type MainMenu = {
+  items?: MenuItem[] | null
+}
+
+export async function getMainMenu(): Promise<MainMenu | null> {
+  try {
+    const res = await fetch(`${PAYLOAD_URL}/api/globals/main-menu?depth=0`, {
+      headers: { Accept: 'application/json' },
+    })
+    if (!res.ok) return null
+    const data = (await res.json()) as MainMenu
+    if (!data?.items?.length) return null
+    return data
+  } catch {
+    return null
+  }
+}
+
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+}
+
+function nestedItems(item: MenuItem): MenuItem[] {
+  if (Array.isArray(item.links) && item.links.length) return item.links.filter(Boolean)
+  if (Array.isArray(item.children) && item.children.length) return item.children.filter(Boolean)
+  return []
+}
+
+function renderMenuItems(items: MenuItem[], listClass: string): string {
+  const lis = items
+    .map((item) => {
+      const label = escapeHtml(item.label || '')
+      const url = escapeHtml(item.url || '#')
+      const children = nestedItems(item)
+      const hasChildren = children.length > 0
+      const liClass = hasChildren ? 'menu-item menu-item-has-children' : 'menu-item'
+      const childHtml = hasChildren ? renderMenuItems(children, 'sub-menu') : ''
+      return `<li class="${liClass}"><a href="${url}">${label}</a>${childHtml}</li>`
+    })
+    .join('')
+  return `<ul class="${listClass}">${lis}</ul>`
+}
+
+/** Build mmenu-compatible nav HTML from Payload Main Menu items. */
+export function menuItemsToHtml(items: MenuItem[]): string {
+  const lis = items
+    .map((item) => {
+      const label = escapeHtml(item.label || '')
+      const url = escapeHtml(item.url || '#')
+      const children = nestedItems(item)
+      const hasChildren = children.length > 0
+      const liClass = hasChildren ? 'menu-item menu-item-has-children' : 'menu-item'
+      const childHtml = hasChildren ? renderMenuItems(children, 'sub-menu') : ''
+      return `<li class="${liClass}"><a href="${url}">${label}</a>${childHtml}</li>`
+    })
+    .join('')
+  return `<nav id="menu" class="menu-main-menu-container"><ul id="menu-main-menu" class="menu">${lis}</ul></nav>`
 }
 
 export { homepageFallback } from './homepage-fallback'

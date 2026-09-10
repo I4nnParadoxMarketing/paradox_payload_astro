@@ -18,6 +18,7 @@ import RichContentBlock from './blocks/RichContentBlock.astro'
 import CapabilitiesGridBlock from './blocks/CapabilitiesGridBlock.astro'
 import TeamSectionBlock from './blocks/TeamSectionBlock.astro'
 import CtaBannerBlock from './blocks/CtaBannerBlock.astro'
+import CallToActionBlock from './blocks/CallToActionBlock.astro'
 
 interface Props {
   blocks: PageBlock[]
@@ -65,6 +66,8 @@ const { blocks } = Astro.props
         return <TeamSectionBlock {...block} />
       case 'ctaBanner':
         return <CtaBannerBlock {...block} />
+      case 'callToAction':
+        return <CallToActionBlock {...block} />
       default:
         return null
     }

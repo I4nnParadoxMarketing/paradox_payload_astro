@@ -21,7 +21,15 @@ const cats = Array.isArray(categories) ? categories : []
       </div>
       {ctaUrl && (
         <div class="cta-wrap">
-          <a href={ctaUrl} class="btn-talk">{ctaLabel}</a>
+          <a
+            href={ctaUrl}
+            class="btn-talk"
+            data-lets-talk
+            data-bs-toggle="modal"
+            data-bs-target="#letsTalkModal"
+          >
+            {ctaLabel}
+          </a>
         </div>
       )}
     </div>

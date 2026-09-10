@@ -1,8 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 
-const htmlPath =
-  'C:/Users/Iann/.cursor/projects/c-Users-Iann-Documents-Paradox-Marketing-Payload-Astro/agent-tools/live-home.html'
+const htmlPath = process.argv[2] || '/tmp/live-home.html'
 const outPath = path.resolve('frontend/src/data/main-menu.html')
 
 const html = fs.readFileSync(htmlPath, 'utf8')

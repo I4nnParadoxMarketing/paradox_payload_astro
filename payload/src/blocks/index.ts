@@ -393,6 +393,27 @@ export const CtaBannerBlock: Block = {
   ],
 }
 
+export const CallToActionBlock: Block = {
+  slug: 'callToAction',
+  labels: { singular: 'Call To Action', plural: 'Call To Actions' },
+  fields: [
+    {
+      name: 'heading',
+      type: 'textarea',
+      required: true,
+      defaultValue:
+        'Considering hiring a consulting firm? Consult with one of our Trusted Advisors to discuss your business goals and needs.',
+    },
+    { name: 'ctaLabel', type: 'text', defaultValue: "Let's Talk", required: true },
+    {
+      name: 'ctaUrl',
+      type: 'text',
+      defaultValue: 'https://hs.paradoxmarketing.io/meetings/paradoxmarketing/discovery-call',
+      required: true,
+    },
+  ],
+}
+
 export const pageBlocks = [
   HeroBlock,
   LogoMarqueeBlock,
@@ -412,4 +433,5 @@ export const pageBlocks = [
   CapabilitiesGridBlock,
   TeamSectionBlock,
   CtaBannerBlock,
+  CallToActionBlock,
 ]

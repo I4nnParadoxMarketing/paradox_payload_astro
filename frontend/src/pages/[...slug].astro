@@ -1,20 +1,184 @@
 ---
 import Layout from '../layouts/Layout.astro'
 import BlockRenderer from '../components/BlockRenderer.astro'
-import { getPage, getFallbackPage } from '../lib/payload'
+import ArticlePage from '../components/ArticlePage.astro'
+import InsightArticlePage from '../components/InsightArticlePage.astro'
+import CmsEditFab from '../components/CmsEditFab.astro'
+import {
+  getPage,
+  getFallbackPage,
+  getInsightItem,
+  getCapabilityByPath,
+  getRecentInsights,
+} from '../lib/payload'
+import { absolutizePayloadMediaHtml } from '../lib/mediaUrl'
 
 const slugParam = Astro.params.slug
-const slug = Array.isArray(slugParam) ? slugParam.join('/') : slugParam ?? ''
+const path = Array.isArray(slugParam) ? slugParam.join('/') : slugParam ?? ''
+const parts = path.split('/').filter(Boolean)
 
-const page = (await getPage(slug)) ?? getFallbackPage(slug)
+function formatDate(value: unknown): string {
+  if (typeof value !== 'string') return ''
+  const date = new Date(value)
+  if (Number.isNaN(date.getTime())) return value
+  return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+}
 
-if (!page) {
+function humanizeSlug(slug: string): string {
+  return slug
+    .split('-')
+    .filter(Boolean)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(' ')
+}
+
+type InsightView = {
+  kind: 'insight'
+  pageTitle: string
+  description?: string
+  heading: string
+  subtitle?: string
+  dateLabel?: string
+  imageUrl?: string
+  bodyHtml?: string
+  capabilityLabel?: string
+  capabilityUrl?: string
+  slug: string
+  editId: string | number
+}
+
+type CapabilityView = {
+  kind: 'capability'
+  pageTitle: string
+  description?: string
+  heading: string
+  subtitle?: string
+  imageUrl?: string
+  bodyHtml?: string
+  editId: string | number
+}
+
+type PageView = {
+  kind: 'page'
+  pageTitle: string
+  description?: string
+  blocks: Array<{ blockType: string; [key: string]: unknown }>
+}
+
+let view: InsightView | CapabilityView | PageView | null = null
+
+function buildInsightView(
+  insight: Record<string, unknown>,
+  fallbackSlug: string,
+  capabilityTagHint?: string,
+): InsightView {
+  const heading = String(insight.title || fallbackSlug)
+  const meta = (insight.meta as { title?: string; description?: string } | undefined) || {}
+  const tag =
+    (typeof insight.capabilityTag === 'string' && insight.capabilityTag.trim()) ||
+    capabilityTagHint ||
+    ''
+  return {
+    kind: 'insight',
+    pageTitle: meta.title ?? heading,
+    description: meta.description ?? String(insight.excerpt || ''),
+    heading,
+    subtitle: String(insight.excerpt || ''),
+    dateLabel: formatDate(insight.publishedDate),
+    imageUrl: typeof insight.imageUrl === 'string' ? insight.imageUrl : '',
+    bodyHtml: typeof insight.bodyHtml === 'string' ? insight.bodyHtml : '',
+    capabilityLabel: tag ? humanizeSlug(tag) : '',
+    capabilityUrl: tag ? `/capabilities/${tag}` : '',
+    slug: String(insight.slug || fallbackSlug),
+    editId: insight.id as string | number,
+  }
+}
+
+// /capabilities/{tag}/insights/{slug}
+if (parts[0] === 'capabilities' && parts[2] === 'insights' && parts[3]) {
+  const insight = await getInsightItem(parts[3])
+  if (insight) view = buildInsightView(insight, parts[3], parts[1])
+}
+
+// /insights/{slug}
+if (!view && parts[0] === 'insights' && parts[1] && parts.length === 2) {
+  const insight = await getInsightItem(parts[1])
+  if (insight) view = buildInsightView(insight, parts[1])
+}
+
+// /capabilities/... nested capability pages (any depth, but not /insights/)
+if (
+  !view &&
+  parts[0] === 'capabilities' &&
+  parts[1] &&
+  !parts.includes('insights')
+) {
+  const capability = await getCapabilityByPath(parts.join('/'))
+  if (capability) {
+    const heading = String(capability.title || parts[parts.length - 1])
+    const meta = (capability.meta as { title?: string; description?: string } | undefined) || {}
+    view = {
+      kind: 'capability',
+      pageTitle: meta.title ?? heading,
+      description: meta.description ?? String(capability.description || ''),
+      heading,
+      subtitle: String(capability.description || ''),
+      imageUrl: typeof capability.imageUrl === 'string' ? capability.imageUrl : '',
+      bodyHtml: absolutizePayloadMediaHtml(
+        typeof capability.bodyHtml === 'string' ? capability.bodyHtml : '',
+      ),
+      editId: capability.id as string | number,
+    }
+  }
+}
+
+if (!view) {
+  const page = (await getPage(path)) ?? getFallbackPage(path)
+  if (page) {
+    view = {
+      kind: 'page',
+      pageTitle: page.meta?.title ?? page.title,
+      description: page.meta?.description,
+      blocks: (page.layout ?? []) as PageView['blocks'],
+    }
+  }
+}
+
+if (!view) {
   return Astro.redirect('/404')
 }
 
-const blocks = page.layout ?? []
+const recentInsights =
+  view.kind === 'insight' ? await getRecentInsights(5, view.slug) : []
 ---
 
-<Layout title={page.meta?.title ?? page.title} description={page.meta?.description}>
-  <BlockRenderer blocks={blocks} />
-</Layout>
+{view.kind === 'insight' ? (
+  <Layout title={view.pageTitle} description={view.description}>
+    <InsightArticlePage
+      title={view.heading}
+      subtitle={view.subtitle}
+      dateLabel={view.dateLabel}
+      imageUrl={view.imageUrl}
+      bodyHtml={view.bodyHtml}
+      capabilityLabel={view.capabilityLabel}
+      capabilityUrl={view.capabilityUrl}
+      recentInsights={recentInsights}
+    />
+    <CmsEditFab collection="insights" id={view.editId} label="Edit page" />
+  </Layout>
+) : view.kind === 'capability' ? (
+  <Layout title={view.pageTitle} description={view.description}>
+    <ArticlePage
+      title={view.heading}
+      subtitle={view.subtitle}
+      imageUrl={view.imageUrl}
+      bodyHtml={view.bodyHtml}
+      eyebrow="Capability"
+    />
+    <CmsEditFab collection="capabilities" id={view.editId} label="Edit page" />
+  </Layout>
+) : (
+  <Layout title={view.pageTitle} description={view.description}>
+    <BlockRenderer blocks={view.blocks} />
+  </Layout>
+)}
