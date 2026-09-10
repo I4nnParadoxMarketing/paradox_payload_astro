@@ -1,0 +1,1014 @@
+{
+  "items": [
+    {
+      "label": "Capabilities",
+      "url": "#",
+      "children": [
+        {
+          "label": "Content Marketing",
+          "url": "#",
+          "links": [
+            {
+              "label": "Content Marketing (Overview)",
+              "url": "/capabilities/content-marketing/"
+            },
+            {
+              "label": "Blog Article Writing",
+              "url": "/capabilities/content-marketing/blog-article-writing/"
+            },
+            {
+              "label": "Website Content Upgrades",
+              "url": "/capabilities/content-marketing/website-content-upgrades/"
+            },
+            {
+              "label": "Website Resources",
+              "url": "/capabilities/content-marketing/website-resources/"
+            }
+          ]
+        },
+        {
+          "label": "CRM Strategy",
+          "url": "#",
+          "links": [
+            {
+              "label": "CRM Strategy (Overview)",
+              "url": "/capabilities/crm-strategy/"
+            },
+            {
+              "label": "CRM Customization",
+              "url": "/capabilities/crm-strategy/customization/"
+            },
+            {
+              "label": "Dashboards & Reporting",
+              "url": "/capabilities/crm-strategy/dashboards-reporting/"
+            },
+            {
+              "label": "CRM Data Hygiene",
+              "url": "/capabilities/crm-strategy/data-hygiene/"
+            },
+            {
+              "label": "Implementation",
+              "url": "/capabilities/crm-strategy/implementation/"
+            }
+          ]
+        },
+        {
+          "label": "Demand Generation",
+          "url": "#",
+          "links": [
+            {
+              "label": "Demand Generation (Overview)",
+              "url": "/capabilities/demand-generation/"
+            },
+            {
+              "label": "Chatbot Development",
+              "url": "/capabilities/demand-generation/chatbot-development/"
+            },
+            {
+              "label": "Lead Generation",
+              "url": "/capabilities/demand-generation/lead-generation/"
+            },
+            {
+              "label": "Lead Management Process Design",
+              "url": "/capabilities/demand-generation/lead-management-process-design/"
+            },
+            {
+              "label": "Traffic Generation",
+              "url": "/capabilities/demand-generation/traffic-generation/"
+            }
+          ]
+        },
+        {
+          "label": "Digital Brand Development",
+          "url": "#",
+          "links": [
+            {
+              "label": "Digital Brand Development (Overview)",
+              "url": "/capabilities/digital-brand-development/"
+            },
+            {
+              "label": "New Websites",
+              "url": "/capabilities/digital-brand-development/website-design-development/new-builds/"
+            },
+            {
+              "label": "Website Redesign",
+              "url": "/capabilities/digital-brand-development/website-design-development/redesigns/"
+            },
+            {
+              "label": "Website Design & Development",
+              "url": "/capabilities/digital-brand-development/website-design-development/"
+            },
+            {
+              "label": "Social Media Marketing",
+              "url": "/capabilities/digital-brand-development/social-media-marketing-services/"
+            }
+          ]
+        },
+        {
+          "label": "HubSpot Experts",
+          "url": "#",
+          "links": [
+            {
+              "label": "HubSpot (Overview)",
+              "url": "/capabilities/hubspot-experts/"
+            },
+            {
+              "label": "Growth Driven Website Designers",
+              "url": "/capabilities/hubspot-experts/growth-driven-design/"
+            },
+            {
+              "label": "HubSpot & SalesForce Integration",
+              "url": "/capabilities/hubspot-experts/hubspot-salesforce-crm-software-integration/"
+            },
+            {
+              "label": "Inbound Marketing Consultants",
+              "url": "/capabilities/hubspot-experts/inbound-marketing-consultants/"
+            },
+            {
+              "label": "Inbound Sales Consultants",
+              "url": "/capabilities/hubspot-experts/inbound-sales-consultants/"
+            },
+            {
+              "label": "Hubspot Sales Onboarding",
+              "url": "/capabilities/hubspot-experts/hubspot-sales-onboarding/"
+            }
+          ]
+        },
+        {
+          "label": "Knowledge Management",
+          "url": "#",
+          "links": [
+            {
+              "label": "Knowledge Management (Overview)",
+              "url": "/capabilities/knowledge-management/"
+            },
+            {
+              "label": "Competitive Research",
+              "url": "/capabilities/knowledge-management/competitive-research/"
+            },
+            {
+              "label": "Data Analytics",
+              "url": "/capabilities/knowledge-management/data-analytics/"
+            },
+            {
+              "label": "Data Driven Decision Making",
+              "url": "/capabilities/knowledge-management/data-driven-decision-making/"
+            }
+          ]
+        },
+        {
+          "label": "Ontraport Experts",
+          "url": "#",
+          "links": [
+            {
+              "label": "Ontraport Experts (Overview)",
+              "url": "/capabilities/ontraport-experts/"
+            },
+            {
+              "label": "Integrating Ontraport And WordPress \u2013 Beginner Guide & Tutorial",
+              "url": "/capabilities/ontraport-experts/insights/integrating-wordpress/"
+            },
+            {
+              "label": "Ontraport Vs HubSpot",
+              "url": "/capabilities/ontraport-experts/insights/ontraport-vs-hubspot/"
+            }
+          ]
+        },
+        {
+          "label": "Paid Advertising",
+          "url": "/capabilities/paid-advertising/",
+          "links": [
+            {
+              "label": "Paid Advertising (Overview)",
+              "url": "/capabilities/paid-advertising/"
+            },
+            {
+              "label": "Bing Ads",
+              "url": "/capabilities/paid-advertising/bing-ads/"
+            },
+            {
+              "label": "Facebook Ads",
+              "url": "/capabilities/paid-advertising/facebook-ads/"
+            },
+            {
+              "label": "Google Ads",
+              "url": "/capabilities/paid-advertising/google-ads/"
+            },
+            {
+              "label": "LinkedIn Ads",
+              "url": "/capabilities/paid-advertising/linkedin-ads/"
+            }
+          ]
+        },
+        {
+          "label": "Sales & Marketing Integration",
+          "url": "#",
+          "links": [
+            {
+              "label": "Sales & Marketing Integration (Overview)",
+              "url": "/capabilities/sales-marketing-integration/"
+            },
+            {
+              "label": "Email Marketing",
+              "url": "/capabilities/sales-marketing-integration/email-marketing/"
+            },
+            {
+              "label": "Funnel Management",
+              "url": "/capabilities/sales-marketing-integration/funnel-management/"
+            },
+            {
+              "label": "Marketing Automation",
+              "url": "/capabilities/sales-marketing-integration/marketing-automation/"
+            }
+          ]
+        },
+        {
+          "label": "Search Engine Optimization",
+          "url": "#",
+          "links": [
+            {
+              "label": "Search Engine Optimization (overview)",
+              "url": "/capabilities/search-engine-optimization/"
+            },
+            {
+              "label": "Competitive Analysis",
+              "url": "/capabilities/search-engine-optimization/competitive-analysis/"
+            },
+            {
+              "label": "Competitive Research",
+              "url": "/capabilities/knowledge-management/competitive-research/"
+            },
+            {
+              "label": "Keyword Research",
+              "url": "/capabilities/search-engine-optimization/keyword-research/"
+            },
+            {
+              "label": "Link Building",
+              "url": "/capabilities/search-engine-optimization/link-building/"
+            },
+            {
+              "label": "Local SEO",
+              "url": "/capabilities/search-engine-optimization/local-seo/"
+            },
+            {
+              "label": "Technical SEO Optimization",
+              "url": "/capabilities/search-engine-optimization/technical-optimization/"
+            },
+            {
+              "label": "YouTube SEO Services",
+              "url": "/capabilities/search-engine-optimization/youtube-seo-services/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Industries",
+      "url": "#",
+      "children": [
+        {
+          "label": "Real Estate",
+          "url": "/industries/real-estate/"
+        },
+        {
+          "label": "Information Technology",
+          "url": "/industries/information-technology/"
+        },
+        {
+          "label": "Healthcare",
+          "url": "/industries/healthcare/",
+          "links": [
+            {
+              "label": "Healthcare Content Marketing",
+              "url": "/capabilities/content-marketing/"
+            }
+          ]
+        },
+        {
+          "label": "Legal",
+          "url": "/industries/legal/"
+        },
+        {
+          "label": "Compliance and Insurance",
+          "url": "/industries/compliance-and-insurance/"
+        },
+        {
+          "label": "Professional Services",
+          "url": "/industries/professional-services/"
+        },
+        {
+          "label": "Financial Services",
+          "url": "/industries/financial-services/"
+        },
+        {
+          "label": "Home Services",
+          "url": "/industries/home-services/"
+        },
+        {
+          "label": "Tourism",
+          "url": "/industries/tourism/"
+        },
+        {
+          "label": "Cryptocurrency",
+          "url": "/industries/cryptocurrency/"
+        }
+      ]
+    },
+    {
+      "label": "Insights",
+      "url": "#",
+      "children": [
+        {
+          "label": "CRM Insights",
+          "url": "#",
+          "links": [
+            {
+              "label": "CRM Insights",
+              "url": "/capabilities/crm-strategy/insights/"
+            },
+            {
+              "label": "Tips for Getting the Most Our of Your CRM",
+              "url": "/capabilities/crm-strategy/insights/4-tips-crm/"
+            },
+            {
+              "label": "4 Reasons A CRM Trumps Excel Spreadsheets",
+              "url": "/capabilities/crm-strategy/insights/4-reasons-a-crm-trumps-spreadsheets/"
+            },
+            {
+              "label": "How Big Should Your Business Be For CRM?",
+              "url": "/capabilities/crm-strategy/insights/how-big-business-before-need-crm/"
+            },
+            {
+              "label": "The Chatbot CRM Revolution: Power of AI",
+              "url": "/capabilities/crm-strategy/insights/the-chatbot-crm-revolution-power-of-ai/"
+            },
+            {
+              "label": "Importance Of Personalized Customer Experience And Ways To Achieve It",
+              "url": "/capabilities/crm-strategy/insights/importance-of-personalized-customer-experience-and-ways-to-achieve-it/"
+            },
+            {
+              "label": "Funnel Chart to Optimize your Sales Process",
+              "url": "/capabilities/crm-strategy/insights/creating-a-funnel-chart-to-optimize-your-sales-process/"
+            },
+            {
+              "label": "The 4 Significant Funnel Metrics To Follow",
+              "url": "/capabilities/crm-strategy/insights/the-4-significant-funnel-metrics-you-should-be-following/"
+            },
+            {
+              "label": "Keeping Your Contained Data Clean",
+              "url": "/capabilities/crm-strategy/insights/crm-strategy-keeping-your-contained-data-clean/"
+            },
+            {
+              "label": "Lead Generation Is More Than Number Of Leads",
+              "url": "/capabilities/crm-strategy/insights/lead-generation-is-more-than-just-total-number-of-leads/"
+            },
+            {
+              "label": "8 Best WordPress Client Portal Plugins",
+              "url": "/capabilities/crm-strategy/insights/8-best-wordpress-client-portal-plugins/"
+            },
+            {
+              "label": "How To Create A Client Portal",
+              "url": "/capabilities/crm-strategy/insights/how-to-create-a-client-portal-step-by-step-web-guides/"
+            }
+          ]
+        },
+        {
+          "label": "Content Marketing Insights",
+          "url": "#",
+          "links": [
+            {
+              "label": "Content Marketing Insights",
+              "url": "/capabilities/content-marketing/insights/"
+            },
+            {
+              "label": "5 Reasons Why Your Business Needs A Blog",
+              "url": "/capabilities/content-marketing/insights/5-reasons-your-business-needs-a-blog/"
+            },
+            {
+              "label": "6 Benefits of Creating Buyer Personas",
+              "url": "/capabilities/content-marketing/insights/6-immediate-benefits-of-creating-buyer-personas-for-your-business/"
+            },
+            {
+              "label": "SONDER",
+              "url": "/capabilities/content-marketing/insights/sonder-the-unknown-driving-force-of-sales-and-marketing/"
+            },
+            {
+              "label": "Ideal Customer Profiles vs Buyer Personas",
+              "url": "/capabilities/content-marketing/insights/ideal-customer-profiles-vs-buyer-personas-what-is-the-difference/"
+            },
+            {
+              "label": "Content Ideas for Existing Customers",
+              "url": "/capabilities/content-marketing/insights/content-ideas-for-customers-who-have-already-bought-from-you/"
+            },
+            {
+              "label": "Full Funnel Marketing & The Bigger Picture",
+              "url": "/capabilities/content-marketing/insights/full-funnel-marketing-how-to-not-miss-the-bigger-picture/"
+            },
+            {
+              "label": "Developing Your Content Matrix",
+              "url": "/capabilities/content-marketing/insights/a-step-by-step-guide-to-developing-your-content-matrix/"
+            },
+            {
+              "label": "Writing Blog Content For Prospects & Google",
+              "url": "/capabilities/content-marketing/insights/writing-blog-content-for-google-your-prospects/"
+            },
+            {
+              "label": "Google Rankings, Engagement Signals & Content",
+              "url": "/capabilities/content-marketing/insights/googles-rankings-engagement-signals-quality-content-the-connection/"
+            },
+            {
+              "label": "How To Update Blog Posts",
+              "url": "/capabilities/content-marketing/insights/how-to-update-blog-posts-and-every-detail-to-consider/"
+            },
+            {
+              "label": "How To Create Business Case Studies",
+              "url": "/capabilities/content-marketing/insights/how-to-create-business-case-studies-to-add-to-your-website/"
+            },
+            {
+              "label": "How Webinars Can Convert Prospects & Leads",
+              "url": "/capabilities/content-marketing/insights/how-webinars-can-convert-prospects-into-leads-and-leads-into-customers/"
+            },
+            {
+              "label": "Upgrade Your Website Content For Google",
+              "url": "/capabilities/content-marketing/insights/upgrade-your-website-content-for-google-your-prospects/"
+            },
+            {
+              "label": "Targeted Email Marketing Tips For Sales",
+              "url": "/capabilities/content-marketing/insights/targeted-email-marketing-tips-for-sales-marketing-strategies/"
+            },
+            {
+              "label": "Sales Enablement & Content Marketing",
+              "url": "/capabilities/content-marketing/insights/sales-enablement-content-marketing-how-they-are-related/"
+            },
+            {
+              "label": "Blog SEO: 9 Ways To Optimize Your Content For Search Engines",
+              "url": "/capabilities/content-marketing/insights/blog-seo-9-ways-to-optimize-your-content-for-search-engines/"
+            },
+            {
+              "label": "Content Marketing Strategies That Will Improve Customer Retention",
+              "url": "/capabilities/content-marketing/insights/content-marketing-strategies-that-will-improve-customer-retention/"
+            }
+          ]
+        },
+        {
+          "label": "SEO Insights",
+          "url": "#",
+          "links": [
+            {
+              "label": "SEO Insights",
+              "url": "/capabilities/search-engine-optimization/insights/"
+            },
+            {
+              "label": "What Can We Do About Spam Bots?",
+              "url": "/capabilities/search-engine-optimization/insights/spam-bots-from-tinder-to-seo-webspam-what-can-we-do/"
+            },
+            {
+              "label": "Importance of Outbound Linking in an Era of AI",
+              "url": "/capabilities/demand-generation/insights/importance-of-outbound-linking-in-a-world-of-ai-generated-content/"
+            },
+            {
+              "label": "Making Use Of Accidental And Typo Backlinks",
+              "url": "/capabilities/search-engine-optimization/insights/exploiting-accidental-and-typo-backlinks/"
+            },
+            {
+              "label": "Using Google Trends to Follow Demand",
+              "url": "/capabilities/search-engine-optimization/insights/how-many-people-are-looking-for-something-your-business-can-provide/"
+            },
+            {
+              "label": "On-Page SEO vs Off-Page SEO",
+              "url": "/capabilities/search-engine-optimization/insights/understanding-seo-terminology-on-page-seo-vs-off-page-seo/"
+            },
+            {
+              "label": "Optimising Your SEO For 2027 And Not 2017",
+              "url": "/capabilities/search-engine-optimization/insights/why-you-should-be-optimising-your-seo-for-2027-and-not-2017/"
+            },
+            {
+              "label": "Is Viral Link Building A Myth",
+              "url": "/capabilities/search-engine-optimization/insights/is-viral-link-building-a-myth/"
+            },
+            {
+              "label": "Monitoring the Top On-Page SEO Factors",
+              "url": "/capabilities/search-engine-optimization/insights/monitoring-the-top-on-page-seo-factors-for-your-website/"
+            },
+            {
+              "label": "Common Website Problems and How to Fix Them",
+              "url": "/capabilities/search-engine-optimization/insights/top-12-most-common-website-problems-and-how-to-fix-them/"
+            },
+            {
+              "label": "On-Page SEO For A Brand New Website",
+              "url": "/capabilities/search-engine-optimization/insights/on-page-seo-new-website/"
+            },
+            {
+              "label": "User Engagement Metrics & Why Are They Important",
+              "url": "/capabilities/search-engine-optimization/insights/what-are-user-engagement-metrics-and-why-are-they-important/"
+            },
+            {
+              "label": "The Value of Google Analytics",
+              "url": "/capabilities/search-engine-optimization/insights/website-metrics-traffic-the-value-of-google-analytics/"
+            },
+            {
+              "label": "On-Page SEO for the Human as Well as Bots",
+              "url": "/capabilities/search-engine-optimization/insights/on-page-seo-for-the-human-and-the-machine/"
+            },
+            {
+              "label": "A Simple Technical SEO Guide",
+              "url": "/capabilities/search-engine-optimization/insights/technical-seo/"
+            },
+            {
+              "label": "Technical SEO Audits Made Easy With Sitebulb",
+              "url": "/capabilities/search-engine-optimization/insights/sitebulb-seo-audit-tool/"
+            },
+            {
+              "label": "Ultimate Checklist to Technical SEO Audit",
+              "url": "/capabilities/search-engine-optimization/insights/performing-seo-audit/"
+            },
+            {
+              "label": "Best Technical SEO Tools for Auditing",
+              "url": "/capabilities/search-engine-optimization/insights/seo-tools/"
+            },
+            {
+              "label": "XML Sitemap And Why Is It Important",
+              "url": "/capabilities/search-engine-optimization/insights/xml-sitemaps/"
+            },
+            {
+              "label": "Reinforcing Loop Within SEO",
+              "url": "/capabilities/search-engine-optimization/insights/systems-science/"
+            },
+            {
+              "label": "On-Page SEO & the Inbound Methodology",
+              "url": "/capabilities/search-engine-optimization/insights/on-page-seo-in-each-stage-of-the-inbound-methodology/"
+            },
+            {
+              "label": "Optimize Your YouTube Channel for Search",
+              "url": "/capabilities/search-engine-optimization/insights/13-youtube-optimization-tips-for-improving-your-channels-seo/"
+            },
+            {
+              "label": "The Value of a Website Resources Library",
+              "url": "/capabilities/search-engine-optimization/insights/the-value-of-a-website-resources-library-and-the-resources-to-add/"
+            },
+            {
+              "label": "Entity SEO: Essential Strategies for Enhancing Your Website\u2019s Semantic Structure",
+              "url": "/capabilities/search-engine-optimization/insights/entity-seo-essential-strategies-for-enhancing-your-websites-semantic-structure/"
+            },
+            {
+              "label": "What Is Cumulative Layout Shift?",
+              "url": "/capabilities/search-engine-optimization/insights/what-is-cumulative-layout-shift/"
+            }
+          ]
+        },
+        {
+          "label": "Sales & Marketing Integration Insights",
+          "url": "#",
+          "links": [
+            {
+              "label": "Sales & Marketing Integration Insights",
+              "url": "/capabilities/sales-marketing-integration/insights/"
+            },
+            {
+              "label": "Align The Marketing & Sales Lead Management Process",
+              "url": "/capabilities/sales-marketing-integration/insights/align-the-marketing-sales-lead-management-process-from-the-bottom-up/"
+            },
+            {
+              "label": "Creating The Perfect Inbound Salesperson",
+              "url": "/capabilities/sales-marketing-integration/insights/inbound-sales-create-salespeople-your-prospects-will-want-to-speak-to/"
+            },
+            {
+              "label": "The Importance of Business Communication",
+              "url": "/capabilities/sales-marketing-integration/insights/the-importance-of-business-communication-in-your-organization/"
+            },
+            {
+              "label": "The Workplace & Effective Communication",
+              "url": "/capabilities/sales-marketing-integration/insights/success-in-the-workplace-starts-with-effective-communication/"
+            },
+            {
+              "label": "How Sales Consulting Can Aid Marketing",
+              "url": "/capabilities/sales-marketing-integration/insights/how-sales-consulting-can-aid-the-relationship-with-marketing/"
+            },
+            {
+              "label": "How To Use Marketing And Sales Job Aids",
+              "url": "/capabilities/sales-marketing-integration/insights/how-to-use-marketing-and-sales-job-aids/"
+            },
+            {
+              "label": "7 Sales & Marketing Job Aid Examples",
+              "url": "/capabilities/sales-marketing-integration/insights/7-sales-marketing-job-aid-examples-teams-should-use-why/"
+            },
+            {
+              "label": "Evaluating Marketing & Sales Talent",
+              "url": "/capabilities/sales-marketing-integration/insights/evaluating-marketing-sales-talent-to-maximize-budgets-achieve-success/"
+            },
+            {
+              "label": "Website Call Tracking Made Easy With PhoneWagon: Better Than CallRail",
+              "url": "/capabilities/sales-marketing-integration/insights/website-call-tracking-made-easy-with-phonewagon-better-than-callrail/"
+            },
+            {
+              "label": "Bant & How Does it Helps a Sales Team",
+              "url": "/capabilities/sales-marketing-integration/insights/bant/"
+            },
+            {
+              "label": "Reducing Marketing Spend Without Sacrificing ROI",
+              "url": "/capabilities/sales-marketing-integration/insights/reducing-marketing-spend-make-changes-without-sacrificing-roi/"
+            },
+            {
+              "label": "Website Call Tracking Software",
+              "url": "/capabilities/sales-marketing-integration/insights/introduction-to-website-call-tracking-software-read-this-before-you-make-a-decision/"
+            },
+            {
+              "label": "How A Job Aid Contributes To A Successful Sales Process",
+              "url": "/capabilities/sales-marketing-integration/insights/how-to-ensure-a-successful-sales-process-with-a-job-aid/"
+            }
+          ]
+        },
+        {
+          "label": "Knowledge Management Insights",
+          "url": "#",
+          "links": [
+            {
+              "label": "Knowledge Management Insights",
+              "url": "/capabilities/knowledge-management/insights/"
+            },
+            {
+              "label": "In-House Marketing Vs Outsourcing Marketing Agency",
+              "url": "/capabilities/knowledge-management/insights/in-house-marketing-vs-outsourcing-to-an-agency/"
+            },
+            {
+              "label": "The Reason Online Marketers Call Themselves Ninjas",
+              "url": "/capabilities/knowledge-management/insights/marketing-ninja-why-this-title/"
+            },
+            {
+              "label": "The Hats Business Owners Wear",
+              "url": "/capabilities/knowledge-management/insights/6-hats-worn-by-business-owners/"
+            },
+            {
+              "label": "25 Tools to Conduct Competitor Research",
+              "url": "/capabilities/knowledge-management/insights/25-tools-to-conduct-competitor-research/"
+            },
+            {
+              "label": "Essential Management Consulting Frameworks",
+              "url": "/capabilities/knowledge-management/insights/introduction-5-essential-management-consulting-frameworks/"
+            },
+            {
+              "label": "Benchmark Analysis to Compete in Your Industry",
+              "url": "/capabilities/knowledge-management/insights/using-benchmark-analysis-to-compete-in-your-industry/"
+            },
+            {
+              "label": "Causes of Communication Breakdown in Business",
+              "url": "/capabilities/knowledge-management/insights/8-usual-causes-of-communication-breakdown-in-business/"
+            },
+            {
+              "label": "Which Kind Of Hits Does Google Analytics Track?",
+              "url": "/capabilities/knowledge-management/insights/which-kind-of-hits-does-google-analytics-track-what-to-know/"
+            },
+            {
+              "label": "Hiring Consultants to Get Ahead",
+              "url": "/capabilities/knowledge-management/insights/hiring-consultants-to-get-ahead-what-you-should-consider/"
+            },
+            {
+              "label": "What Is Strategy Consulting And Why Is It Best For You?",
+              "url": "/capabilities/knowledge-management/insights/what-is-strategy-consulting-and-why-is-it-best-for-you/"
+            },
+            {
+              "label": "Choose A Consulting Firm With Effective Communication Skills",
+              "url": "/capabilities/knowledge-management/insights/choose-a-consulting-firm-with-effective-communication-skills/"
+            },
+            {
+              "label": "The Different Types Of Consulting Services",
+              "url": "/capabilities/knowledge-management/insights/a-guide-to-the-different-types-of-consulting-services/"
+            },
+            {
+              "label": "Top Ranking Consulting Firms You Should Know",
+              "url": "/capabilities/knowledge-management/insights/what-are-the-top-ranking-consulting-firms-you-should-know/"
+            },
+            {
+              "label": "Rock Solid Project Communication Plan",
+              "url": "/capabilities/knowledge-management/insights/why-a-rock-solid-project-communication-plan-is-important/"
+            },
+            {
+              "label": "How To Do A Competitive Analysis",
+              "url": "/capabilities/knowledge-management/insights/how-to-do-a-competitive-analysis-3-questions-answered/"
+            },
+            {
+              "label": "Ethical Communication: The Basic Principles",
+              "url": "/capabilities/knowledge-management/insights/ethical-communication-the-basic-principles/"
+            },
+            {
+              "label": "Outsourced Marketing Is A Viable Option",
+              "url": "/capabilities/knowledge-management/insights/why-outsourced-marketing-is-a-viable-option-to-consider-during-tough-times/"
+            },
+            {
+              "label": "Outsourcing B2B Marketing Efforts",
+              "url": "/capabilities/knowledge-management/insights/why-outsourcing-b2b-marketing-efforts-will-benefit-your-business/"
+            },
+            {
+              "label": "Make Room in Your Marketing Budget for the Talent You Need",
+              "url": "/capabilities/knowledge-management/insights/how-to-make-room-in-your-b2b-marketing-budget-for-the-talent-you-need/"
+            },
+            {
+              "label": "Financial Costs of In-House vs. Outsourced Marketing",
+              "url": "/capabilities/knowledge-management/insights/the-financial-costs-and-value-of-in-house-vs-outsourced-marketing/"
+            },
+            {
+              "label": "What Is A Consulting Firm?",
+              "url": "/capabilities/knowledge-management/insights/what-is-a-consulting-firm-how-do-they-help-your-business/"
+            },
+            {
+              "label": "Building Your Marketing Team: In-house vs. Freelancer vs. Outsourcing",
+              "url": "/capabilities/knowledge-management/insights/building-your-marketing-team-in-house-vs-freelancer-vs-outsourcing/"
+            },
+            {
+              "label": "Evaluating the Costs of In-house Marketing",
+              "url": "/capabilities/knowledge-management/insights/evaluating-the-costs-of-in-house-marketing-for-efficient-budget-allocation/"
+            },
+            {
+              "label": "Rented B2B Team Members VS FTEs",
+              "url": "/capabilities/knowledge-management/insights/rented-b2b-team-members-vs-ftes-we-weigh-the-pros-and-cons/"
+            },
+            {
+              "label": "Find New Marketing Dollars & Grow Results",
+              "url": "/capabilities/knowledge-management/insights/marketing-budget-sourcing-money-to-support-your-campaigns/"
+            }
+          ]
+        },
+        {
+          "label": "Hubspot Insights",
+          "url": "#",
+          "links": [
+            {
+              "label": "Hubspot Insights",
+              "url": "/capabilities/hubspot-experts/insights/"
+            },
+            {
+              "label": "38 Essential HubSpot Integrations",
+              "url": "/capabilities/hubspot-experts/insights/38-essential-hubspot-integrations-to-set-yourself-up-for-success/"
+            },
+            {
+              "label": "Using HubSpot's Blog Topic Generator",
+              "url": "/capabilities/hubspot-experts/insights/using-hubspots-blog-topic-generator-to-smash-your-competition/"
+            },
+            {
+              "label": "Utilizing HubSpot\u2019s Marketing Grader",
+              "url": "/capabilities/hubspot-experts/insights/utilizing-hubspots-marketing-grader/"
+            },
+            {
+              "label": "HubSpot Traffic And Google Analytics",
+              "url": "/capabilities/hubspot-experts/insights/why-does-hubspot-traffic-and-google-analytics-traffic-report-different-numbers/"
+            },
+            {
+              "label": "How to Set up the HubSpot-Salesforce Integration Hitch-Free",
+              "url": "/capabilities/hubspot-experts/insights/set-up-the-hubspot-salesforce-integration-hitch-free/"
+            },
+            {
+              "label": "HubSpot Lead Scoring",
+              "url": "/capabilities/hubspot-experts/insights/hubspot-lead-scoring-how-should-it-impact-your-lead-management-process/"
+            },
+            {
+              "label": "Effective HubSpot Project Management Integrations",
+              "url": "/capabilities/hubspot-experts/insights/26-most-effective-hubspot-project-management-integrations/"
+            },
+            {
+              "label": "HubSpot vs Pardot",
+              "url": "/capabilities/hubspot-experts/insights/hubspot-vs-pardot-comprehensive-comparison/"
+            },
+            {
+              "label": "Using HubSpot In The Real Estate Industry",
+              "url": "/capabilities/hubspot-experts/insights/using-hubspot-in-the-real-estate-industry-read-this-first/"
+            },
+            {
+              "label": "Ontraport Vs HubSpot",
+              "url": "/capabilities/ontraport-experts/insights/ontraport-vs-hubspot/"
+            },
+            {
+              "label": "HubSpot vs Salesforce: Which CRM Best Suits Your Needs?",
+              "url": "/capabilities/hubspot-experts/insights/hubspot-vs-salesforce-which-crm-best-suits-your-needs/"
+            }
+          ]
+        },
+        {
+          "label": "Digital Brand Development Insights",
+          "url": "#",
+          "links": [
+            {
+              "label": "Digital Brand Development Insights",
+              "url": "/capabilities/digital-brand-development/insights/"
+            },
+            {
+              "label": "Establishing an Online Presence",
+              "url": "/capabilities/digital-brand-development/insights/establishing-an-online-presence/"
+            },
+            {
+              "label": "Expert\u2019s Guide To Maintaining Brand Consistency",
+              "url": "/capabilities/digital-brand-development/insights/experts-guide-to-maintaining-brand-consistency/"
+            },
+            {
+              "label": "Design Your Lead Management Process",
+              "url": "/capabilities/digital-brand-development/insights/design-your-lead-management-process-before-redesigning-your-website/"
+            },
+            {
+              "label": "Top 10 Engagement Metrics You Need To Be Tracking",
+              "url": "/capabilities/digital-brand-development/insights/top-10-engagement-metrics-you-need-to-be-tracking/"
+            },
+            {
+              "label": "Website Performance Metrics You Should be Analyzing",
+              "url": "/capabilities/digital-brand-development/insights/website-performance-metrics-you-should-be-analyzing-and-why/"
+            },
+            {
+              "label": "Website User Engagement Metrics Mistakes To Avoid",
+              "url": "/capabilities/digital-brand-development/insights/website-user-engagement-metrics-mistakes-to-avoid/"
+            },
+            {
+              "label": "Examine a Website's Performance with Google Analytics Heat Map",
+              "url": "/capabilities/digital-brand-development/insights/examine-a-websites-performance-with-google-analytics-heat-map/"
+            },
+            {
+              "label": "Defining Your Competitive Advantage",
+              "url": "/capabilities/digital-brand-development/insights/defining-your-competitive-advantage-find-your-business-edge/"
+            },
+            {
+              "label": "4 Business Consulting Industry Trends",
+              "url": "/capabilities/digital-brand-development/insights/4-business-consulting-industry-trends-to-look-out-for-in-2020/"
+            },
+            {
+              "label": "Font Wars - A Battle For The Perfect Font",
+              "url": "/capabilities/digital-brand-development/insights/font-wars-a-battle-for-the-perfect-font/"
+            },
+            {
+              "label": "Page Speed Optimization Plugin: WP Rocket",
+              "url": "/capabilities/digital-brand-development/insights/wp-rocket/"
+            },
+            {
+              "label": "Notice a \u201cThis Site May Be Hacked\u201d Tag In Google?",
+              "url": "/capabilities/digital-brand-development/insights/hacked-website/"
+            },
+            {
+              "label": "What Is Caching? The Basics & More",
+              "url": "/capabilities/digital-brand-development/insights/what-is-caching-the-basics-more/"
+            },
+            {
+              "label": "What Is A Thank You Page?",
+              "url": "/capabilities/digital-brand-development/insights/what-is-a-thank-you-page-and-examples/"
+            },
+            {
+              "label": "What Is A Home Page?",
+              "url": "/capabilities/digital-brand-development/insights/what-is-a-home-page-a-websites-starting-point/"
+            },
+            {
+              "label": "5 Best WordPress Form Plugins",
+              "url": "/capabilities/digital-brand-development/insights/5-best-wordpress-form-plugins/"
+            },
+            {
+              "label": "The Difference Between Website & Web Portal",
+              "url": "/capabilities/digital-brand-development/insights/the-difference-between-website-and-web-portal/"
+            },
+            {
+              "label": "The Best WordPress Hosting Options",
+              "url": "/capabilities/digital-brand-development/insights/choosing-the-best-wordpress-hosting-for-your-website-13-options/"
+            },
+            {
+              "label": "Top 10 WordPress Website Builders",
+              "url": "/insights/the-top-10-wordpress-website-builders-that-you-can-use-easily/"
+            },
+            {
+              "label": "10 Best SEO Plugins For WordPress Websites",
+              "url": "/insights/the-search-for-the-best-seo-plugin-for-wordpress/"
+            },
+            {
+              "label": "The Best WordPress Plugins",
+              "url": "/insights/an-overview-of-the-best-wordpress-plugins/"
+            }
+          ]
+        },
+        {
+          "label": "Demand Generation Insights",
+          "url": "#",
+          "links": [
+            {
+              "label": "Demand Generation Insights",
+              "url": "/capabilities/demand-generation/insights/"
+            },
+            {
+              "label": "How to Set Up Lead Tracking",
+              "url": "/capabilities/demand-generation/insights/how-to-set-up-lead-tracking/"
+            },
+            {
+              "label": "The First Stage of a Client Relationship",
+              "url": "/capabilities/demand-generation/insights/the-introduction-the-first-stage-of-a-client-relationship/"
+            },
+            {
+              "label": "Conducting Prospect Research",
+              "url": "/capabilities/demand-generation/insights/conducting-prospect-research/"
+            },
+            {
+              "label": "Cold Calling - Is It Still Relevant?",
+              "url": "/capabilities/demand-generation/insights/cold-calling-is-it-still-relevant/"
+            },
+            {
+              "label": "The Cost of Developing a Chatbot",
+              "url": "/capabilities/demand-generation/insights/the-cost-of-developing-a-chatbot/"
+            },
+            {
+              "label": "9 Ways to Use Your Website to Close Leads",
+              "url": "/capabilities/demand-generation/insights/9-ways-to-use-your-website-to-close-leads-youve-already-spoken-with/"
+            },
+            {
+              "label": "Intelligent Chatbots: How to Make and Identify a Superb Bot",
+              "url": "/capabilities/demand-generation/insights/intelligent-chatbots-how-to-make-and-identify-a-superb-bot/"
+            },
+            {
+              "label": "Our Conversion Rate Optimization Process",
+              "url": "/capabilities/demand-generation/insights/a-top-level-view-of-our-conversion-rate-optimization-process/"
+            },
+            {
+              "label": "Chatbot Development and What That Entails",
+              "url": "/capabilities/demand-generation/insights/a-look-into-chatbot-development-and-what-that-entails/"
+            },
+            {
+              "label": "10 of the Most Popular Chatbot Startups",
+              "url": "/capabilities/demand-generation/insights/10-of-the-most-popular-chatbot-startups/"
+            },
+            {
+              "label": "Learning Chatbots: AI, ML, NLP and LMNOP?",
+              "url": "/capabilities/demand-generation/insights/learning-chatbots-ai-ml-nlp-and-lmnop/"
+            },
+            {
+              "label": "The Real Benefits for Investing in a Chatbot",
+              "url": "/capabilities/demand-generation/insights/the-real-benefits-for-investing-in-a-chatbot/"
+            },
+            {
+              "label": "Conversational UI: Past and Future",
+              "url": "/capabilities/demand-generation/insights/deep-dive-into-conversational-ui-past-and-future/"
+            },
+            {
+              "label": "How AI Bots are Changing the Face of Finance and Banking",
+              "url": "/capabilities/customer-marketing/insights/how-ai-bots-are-changing-the-face-of-finance-and-banking/"
+            },
+            {
+              "label": "Better Integrated Marketing Communication",
+              "url": "/capabilities/demand-generation/insights/7-steps-to-a-better-integrated-marketing-communication/"
+            },
+            {
+              "label": "Importance of Outbound Linking in an Era of AI-Generated Content",
+              "url": "/capabilities/demand-generation/insights/importance-of-outbound-linking-in-a-world-of-ai-generated-content/"
+            }
+          ]
+        },
+        {
+          "label": "Customer Marketing Insights",
+          "url": "/capabilities/customer-marketing/insights/",
+          "links": [
+            {
+              "label": "What Not To Do with Customer Feedback Data",
+              "url": "/capabilities/customer-marketing/insights/the-3-biggest-sins-to-avoid-relating-to-customer-feedback-processes/"
+            },
+            {
+              "label": "Chatbot Use Cases",
+              "url": "/capabilities/customer-marketing/insights/chatbot-use-cases-what-does-a-successful-bot-look-like/"
+            },
+            {
+              "label": "How Perception Influences Interpersonal Communication",
+              "url": "/capabilities/customer-marketing/insights/how-perception-influences-interpersonal-communication/"
+            },
+            {
+              "label": "The Basics Of A Communication Model",
+              "url": "/capabilities/customer-marketing/insights/back-to-basics-the-basics-of-a-communication-model/"
+            }
+          ]
+        },
+        {
+          "label": "Ontraport Experts Insight",
+          "url": "/capabilities/ontraport-experts/insights/",
+          "links": [
+            {
+              "label": "Integrating Ontraport And WordPress",
+              "url": "/capabilities/ontraport-experts/insights/integrating-wordpress/"
+            }
+          ]
+        },
+        {
+          "label": "Paid Advertising",
+          "url": "/capabilities/paid-advertising/",
+          "links": [
+            {
+              "label": "TikTok Ads Guide: Formats, Strategy & Business Growth",
+              "url": "/capabilities/paid-advertising/insights/tiktok-ads/"
+            },
+            {
+              "label": "How Snapchat Ads Can Grow Your Brand\u2019s Visibility",
+              "url": "/capabilities/paid-advertising/insights/snapchat-ads/"
+            },
+            {
+              "label": "Pinterest Ads: Why They Matter For Business Growth",
+              "url": "/capabilities/paid-advertising/insights/pinterest-ads/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Our Team",
+      "url": "/our-team/"
+    },
+    {
+      "label": "Our Portfolio",
+      "url": "/our-portfolio/"
+    }
+  ]
+}
