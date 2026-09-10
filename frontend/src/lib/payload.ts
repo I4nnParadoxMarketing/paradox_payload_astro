@@ -1,3 +1,13 @@
+import {
+  capabilityToPage,
+  industryToPage,
+  insightToPage,
+  portfolioArchivePage,
+  portfolioItemToPage,
+} from './collection-pages'
+import { resolvePageFromWordPress } from './wordpress-fallback'
+import { localPathFromUrl, normalizePath } from './url-utils'
+
 export type PageBlock = {
   blockType: string
   id?: string
@@ -265,6 +275,114 @@ export async function getPersonItem(slug: string) {
       limit: '1',
     })
     return docs[0] ?? null
+  } catch {
+    return null
+  }
+}
+
+async function getDocByLocalPath(
+  collection: 'capabilities' | 'insights' | 'portfolio' | 'industries',
+  localPath: string,
+): Promise<CollectionDoc | null> {
+  const docs = await fetchCollection(collection, {
+    'where[localPath][equals]': localPath,
+    'where[status][equals]': 'published',
+    limit: '1',
+    depth: '1',
+  })
+  if (docs[0]) return docs[0]
+
+  const fallbackDocs = await fetchCollection(collection, {
+    'where[status][equals]': 'published',
+    limit: '500',
+    depth: '1',
+  })
+
+  return (
+    fallbackDocs.find((doc) => {
+      if (typeof doc.localPath === 'string' && doc.localPath === localPath) return true
+      if (typeof doc.url === 'string') return localPathFromUrl(doc.url) === localPath
+      return false
+    }) ?? null
+  )
+}
+
+async function getCapabilityChildren(parentId: unknown): Promise<CollectionDoc[]> {
+  if (!parentId) return []
+  return fetchCollection('capabilities', {
+    'where[parent][equals]': String(parentId),
+    'where[status][equals]': 'published',
+    limit: '100',
+    sort: 'title',
+    depth: '0',
+  })
+}
+
+async function getPortfolioArchiveItems(): Promise<CollectionDoc[]> {
+  return fetchCollection('portfolio', {
+    'where[status][equals]': 'published',
+    limit: '100',
+    sort: '-updatedAt',
+    depth: '0',
+  })
+}
+
+async function resolveCollectionPageFromPayload(path: string): Promise<Page | null> {
+  const localPath = normalizePath(path)
+
+  if (localPath === 'our-portfolio') {
+    const projects = await getPortfolioArchiveItems()
+    if (projects.length === 0) return null
+    return hydratePageLayout(portfolioArchivePage(projects))
+  }
+
+  if (localPath.startsWith('capabilities/') && localPath.includes('/insights/')) {
+    const doc = await getDocByLocalPath('insights', localPath)
+    if (!doc) return null
+    return hydratePageLayout(insightToPage(doc))
+  }
+
+  if (localPath.startsWith('capabilities/')) {
+    const doc = await getDocByLocalPath('capabilities', localPath)
+    if (!doc) return null
+    const children = await getCapabilityChildren(doc.id)
+    return hydratePageLayout(capabilityToPage(doc, children))
+  }
+
+  if (localPath.startsWith('portfolio/')) {
+    const doc = await getDocByLocalPath('portfolio', localPath)
+    if (!doc) return null
+    return hydratePageLayout(portfolioItemToPage(doc))
+  }
+
+  if (localPath.startsWith('insights/')) {
+    const doc = await getDocByLocalPath('insights', localPath)
+    if (!doc) return null
+    return hydratePageLayout(insightToPage(doc))
+  }
+
+  if (localPath.startsWith('industries/')) {
+    const doc = await getDocByLocalPath('industries', localPath)
+    if (!doc) return null
+    return hydratePageLayout(industryToPage(doc))
+  }
+
+  return null
+}
+
+export async function resolveCollectionPage(path: string): Promise<Page | null> {
+  const localPath = normalizePath(path)
+  if (!localPath) return null
+
+  try {
+    const fromPayload = await resolveCollectionPageFromPayload(localPath)
+    if (fromPayload) return fromPayload
+  } catch {
+    // Payload unavailable — fall through to WordPress
+  }
+
+  try {
+    return await resolvePageFromWordPress(localPath)
   } catch {
     return null
   }

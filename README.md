@@ -35,8 +35,11 @@ Payload + Astro/
 | `insights` | `insights` | Blog-style articles |
 | `capabilities` | `capabilities` | Service pages (hierarchical) |
 | `people` | `prdx-people` | Team members |
+| `industries` | `industries` | Industry landing pages |
 
 Import from the live site with `npm run import:wordpress`. Page blocks can use **Use collection** to pull from these instead of manual arrays.
+
+Collection routes (capabilities, insights, portfolio, industries) resolve automatically from imported content — no manual page entry required for each CPT item.
 
 ## Setup
 
@@ -75,7 +78,7 @@ npm run import:wordpress
 
 Stop the Payload dev server first if it is running, to avoid SQLite schema conflicts during import.
 
-This creates **Portfolio**, **Insights**, **Capabilities**, and **People** entries in Payload from the live site's REST API.
+This creates **Portfolio**, **Insights**, **Capabilities**, **Industries**, and **People** entries in Payload from the live site's REST API.
 
 ### Astro frontend
 

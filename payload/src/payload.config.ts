@@ -6,6 +6,7 @@ import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import { Capabilities } from './collections/Capabilities'
+import { Industries } from './collections/Industries'
 import { Insights } from './collections/Insights'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
@@ -33,7 +34,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Pages, Portfolio, Insights, Capabilities, People],
+  collections: [Users, Media, Pages, Portfolio, Insights, Capabilities, Industries, People],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || 'dev-secret',
   cors: [
@@ -61,6 +62,7 @@ export default buildConfig({
         portfolio: { enabled: { find: true, create: true, update: true, delete: false } },
         insights: { enabled: { find: true, create: true, update: true, delete: false } },
         capabilities: { enabled: { find: true, create: true, update: true, delete: false } },
+        industries: { enabled: { find: true, create: true, update: true, delete: false } },
         people: { enabled: { find: true, create: true, update: true, delete: false } },
         media: { enabled: { find: true, create: true, update: false, delete: false } },
       },

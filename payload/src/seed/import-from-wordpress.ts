@@ -5,6 +5,7 @@ import {
   decodeHtml,
   featuredImageUrl,
   fetchAllWPPosts,
+  localPathFromLink,
   portfolioCategories,
   sanitizeHtml,
   stripHtml,
@@ -12,9 +13,11 @@ import {
   type WPPost,
 } from './wp-import/utils'
 
+type ImportCollection = 'portfolio' | 'insights' | 'capabilities' | 'industries' | 'people'
+
 async function upsertBySlug(
   payload: Payload,
-  collection: 'portfolio' | 'insights' | 'capabilities' | 'people',
+  collection: ImportCollection,
   slug: string,
   data: Record<string, unknown>,
 ) {
@@ -54,6 +57,7 @@ async function importPortfolio(payload: Payload) {
     await upsertBySlug(payload, 'portfolio', post.slug, {
       title: decodeHtml(post.title?.rendered ?? post.slug),
       slug: post.slug,
+      localPath: localPathFromLink(post.link),
       status: 'published',
       client: (acf.po_client as string) || undefined,
       projectName: (acf.po_project_name as string) || undefined,
@@ -90,6 +94,7 @@ async function importInsights(payload: Payload) {
     await upsertBySlug(payload, 'insights', post.slug, {
       title: decodeHtml(post.title?.rendered ?? post.slug),
       slug: post.slug,
+      localPath: localPathFromLink(post.link),
       status: 'published',
       excerpt: excerpt || undefined,
       bodyHtml: sanitizeHtml(post.content?.rendered),
@@ -118,6 +123,7 @@ async function importCapabilities(payload: Payload) {
     const id = await upsertBySlug(payload, 'capabilities', post.slug, {
       title: decodeHtml(post.title?.rendered ?? post.slug),
       slug: post.slug,
+      localPath: localPathFromLink(post.link),
       status: 'published',
       description: stripHtml(post.excerpt?.rendered ?? post.content?.rendered ?? '').slice(0, 280) || undefined,
       color: (acf.accent_color as string) || (acf.capability_accent_color as string) || undefined,
@@ -184,6 +190,36 @@ async function importPeople(payload: Payload) {
   console.log(`People: imported ${count} items`)
 }
 
+async function importIndustries(payload: Payload) {
+  const posts = await fetchAllWPPosts('industries')
+  let count = 0
+
+  for (const post of posts) {
+    const excerpt = post.excerpt?.rendered
+      ? stripHtml(post.excerpt.rendered)
+      : stripHtml(post.content?.rendered ?? '').slice(0, 280)
+
+    await upsertBySlug(payload, 'industries', post.slug, {
+      title: decodeHtml(post.title?.rendered ?? post.slug),
+      slug: post.slug,
+      localPath: localPathFromLink(post.link),
+      status: 'published',
+      description: excerpt || undefined,
+      imageUrl: featuredImageUrl(post) || yoastImageUrl(post),
+      url: post.link,
+      bodyHtml: sanitizeHtml(post.content?.rendered),
+      wpId: post.id,
+      meta: {
+        title: post.yoast_head_json?.title,
+        description: post.yoast_head_json?.description,
+      },
+    })
+    count += 1
+  }
+
+  console.log(`Industries: imported ${count} items`)
+}
+
 async function run() {
   const payload = await getPayload({ config })
 
@@ -191,6 +227,7 @@ async function run() {
   await importPortfolio(payload)
   await importInsights(payload)
   await importCapabilities(payload)
+  await importIndustries(payload)
   await importPeople(payload)
   console.log('WordPress import complete.')
   process.exit(0)

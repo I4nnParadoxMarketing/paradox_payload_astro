@@ -1,11 +1,11 @@
 import type { CollectionConfig } from 'payload'
 
-export const Capabilities: CollectionConfig = {
-  slug: 'capabilities',
-  labels: { singular: 'Capability', plural: 'Capabilities' },
+export const Industries: CollectionConfig = {
+  slug: 'industries',
+  labels: { singular: 'Industry', plural: 'Industries' },
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'parent', 'status', 'updatedAt'],
+    defaultColumns: ['title', 'status', 'updatedAt'],
   },
   access: { read: () => true },
   fields: [
@@ -16,7 +16,7 @@ export const Capabilities: CollectionConfig = {
       type: 'text',
       unique: true,
       index: true,
-      admin: { readOnly: true, description: 'Local route path e.g. capabilities/digital-brand-development' },
+      admin: { readOnly: true, description: 'Local route path e.g. industries/legal' },
     },
     {
       name: 'status',
@@ -28,14 +28,7 @@ export const Capabilities: CollectionConfig = {
       ],
     },
     { name: 'description', type: 'textarea' },
-    { name: 'color', type: 'text', admin: { description: 'Accent color e.g. #EFB155' } },
     { name: 'imageUrl', type: 'text' },
-    {
-      name: 'parent',
-      type: 'relationship',
-      relationTo: 'capabilities',
-      admin: { description: 'Parent capability for nested pages' },
-    },
     { name: 'url', type: 'text' },
     { name: 'bodyHtml', type: 'code', admin: { language: 'html' } },
     { name: 'wpId', type: 'number', admin: { readOnly: true, position: 'sidebar' } },

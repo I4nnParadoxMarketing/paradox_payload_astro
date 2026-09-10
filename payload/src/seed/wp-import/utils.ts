@@ -92,6 +92,14 @@ export function capabilityTagFromLink(link: string): string | undefined {
   return match?.[1]
 }
 
+export function localPathFromLink(link: string): string {
+  try {
+    return new URL(link).pathname.replace(/^\/+|\/+$/g, '')
+  } catch {
+    return link.replace(/^\/+|\/+$/g, '')
+  }
+}
+
 export function yoastImageUrl(post: WPPost): string | undefined {
   const images = post.yoast_head_json?.og_image
   if (!Array.isArray(images) || !images[0]) return undefined
