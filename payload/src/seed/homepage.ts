@@ -440,6 +440,68 @@ const innerPageSeeds = [
       },
     ],
   },
+  {
+    title: 'Digital Brand Development',
+    slug: 'capabilities/digital-brand-development',
+    status: 'published' as const,
+    meta: {
+      title: 'Digital Brand Development - Paradox Marketing',
+      description: 'Our digital brand consultants get your brand ready for the new playing field.',
+    },
+    layout: [
+      {
+        blockType: 'pageBanner' as const,
+        title: 'Digital Brand',
+        titleHighlight: 'Development',
+        subtitle: 'How we help you build awareness, authority, and a cohesive brand identity online.',
+      },
+      {
+        blockType: 'richContent' as const,
+        eyebrow: 'How we help',
+        title: 'Our Digital Brand Consultants Get Your Brand Ready For The New Playing Field',
+        bodyHtml:
+          '<p>Digital branding is all about building awareness of your company online. Many different elements go into the strategy of digital brand development, including increasing brand exposure, improving your brand reputation, establishing brand authority, and solidifying your brand identity.</p><p>We work closely with your business to plan and execute an effective inbound branding strategy tailored to your unique brand.</p>',
+      },
+      {
+        blockType: 'ctaBanner' as const,
+        title: 'Have Our Team Become YOUR Team',
+        description: 'We will design a branding strategy applying the inbound methodology and monitor performance to achieve your goals.',
+        ctaLabel: "Let's Talk",
+        ctaUrl: 'https://hs.paradoxmarketing.io/meetings/paradoxmarketing/discovery-call',
+      },
+    ],
+  },
+  {
+    title: 'Our Portfolio',
+    slug: 'our-portfolio',
+    status: 'published' as const,
+    meta: {
+      title: 'Our Portfolio - Paradox Marketing',
+      description: 'Explore client work and case studies from Paradox Marketing.',
+    },
+    layout: [
+      {
+        blockType: 'pageBanner' as const,
+        title: 'Our',
+        titleHighlight: 'Portfolio',
+        subtitle: 'Client work across websites, advertising, CRM, and full marketing systems.',
+      },
+      {
+        blockType: 'portfolio' as const,
+        title: 'Featured',
+        titleHighlight: 'Work',
+        useCollection: true,
+        collectionLimit: 24,
+      },
+      {
+        blockType: 'ctaBanner' as const,
+        title: 'Ready to Build Your Marketing System?',
+        description: 'Let us map your current systems and show you how everything can connect into one measurable growth engine.',
+        ctaLabel: "Let's Talk",
+        ctaUrl: 'https://hs.paradoxmarketing.io/meetings/paradoxmarketing/discovery-call',
+      },
+    ],
+  },
 ]
 
 async function seed() {

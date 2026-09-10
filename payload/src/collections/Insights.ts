@@ -12,6 +12,13 @@ export const Insights: CollectionConfig = {
     { name: 'title', type: 'text', required: true },
     { name: 'slug', type: 'text', required: true, unique: true, index: true },
     {
+      name: 'localPath',
+      type: 'text',
+      unique: true,
+      index: true,
+      admin: { readOnly: true, description: 'Local route path e.g. capabilities/content-marketing/insights/slug' },
+    },
+    {
       name: 'status',
       type: 'select',
       defaultValue: 'published',

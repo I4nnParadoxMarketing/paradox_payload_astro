@@ -1,12 +1,15 @@
 ---
 import Layout from '../../layouts/Layout.astro'
 import BlockRenderer from '../../components/BlockRenderer.astro'
-import { getPagePreview, getFallbackPage } from '../../lib/payload'
+import { getPagePreview, getFallbackPage, resolveCollectionPage } from '../../lib/payload'
 
 const slugParam = Astro.params.slug
 const slug = Array.isArray(slugParam) ? slugParam.join('/') : slugParam ?? ''
 
-const page = (await getPagePreview(slug)) ?? getFallbackPage(slug)
+const page =
+  (await getPagePreview(slug)) ??
+  getFallbackPage(slug) ??
+  (await resolveCollectionPage(slug))
 
 if (!page) {
   return Astro.redirect('/404')

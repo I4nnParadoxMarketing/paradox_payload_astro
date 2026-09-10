@@ -122,6 +122,37 @@ export const pagesFallback: Record<string, Page> = {
       },
     ],
   },
+  'our-portfolio': {
+    title: 'Our Portfolio',
+    slug: 'our-portfolio',
+    status: 'published',
+    meta: {
+      title: 'Our Portfolio - Paradox Marketing',
+      description: 'Explore client work and case studies from Paradox Marketing.',
+    },
+    layout: [
+      {
+        blockType: 'pageBanner',
+        title: 'Our',
+        titleHighlight: 'Portfolio',
+        subtitle: 'Client work across websites, advertising, CRM, and full marketing systems.',
+      },
+      {
+        blockType: 'portfolio',
+        title: 'Featured',
+        titleHighlight: 'Work',
+        useCollection: true,
+        collectionLimit: 24,
+      },
+      {
+        blockType: 'ctaBanner',
+        title: 'Ready to Build Your Marketing System?',
+        description: 'Let us map your current systems and show you how everything can connect into one measurable growth engine.',
+        ctaLabel: "Let's Talk",
+        ctaUrl: 'https://hs.paradoxmarketing.io/meetings/paradoxmarketing/discovery-call',
+      },
+    ],
+  },
   'capabilities/digital-brand-development': {
     title: 'Digital Brand Development',
     slug: 'capabilities/digital-brand-development',
