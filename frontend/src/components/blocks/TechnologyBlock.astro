@@ -1,0 +1,27 @@
+---
+const { title = '', titleHighlight = '', bodyHtml = '', rows = [] } = Astro.props
+const techRows = Array.isArray(rows) ? rows : []
+---
+
+<div class="tech-section">
+  <h2 class="section-title">{title} <span>{titleHighlight}</span></h2>
+  {bodyHtml && <div class="tech-intro" set:html={bodyHtml} />}
+  {techRows.map((row: { label: string; color: string; logos?: string[] | { url: string }[] }) => {
+    const logos = (row.logos || []).map((l) => (typeof l === 'string' ? l : l.url))
+    const doubled = [...logos, ...logos]
+    return (
+      <div class="tech-row-wrapper">
+        <div class="tech-label" style={`background-color: ${row.color}`}>{row.label}</div>
+        <div class="tech-row-card">
+          <div class="marquee-viewport">
+            <div class="marquee-track">
+              {doubled.map((url) => (
+                <img src={url} alt="" loading="lazy" height="35" />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  })}
+</div>

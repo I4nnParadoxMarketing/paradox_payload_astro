@@ -1,0 +1,15 @@
+---
+const {
+  title = '',
+  titleHighlight = '',
+  subtitle = '',
+  variant = 'dark',
+} = Astro.props
+---
+
+<section class:list={['page-banner', variant === 'light' ? 'page-banner--light' : 'page-banner--dark']}>
+  <div class="container">
+    <h1>{title} {titleHighlight && <span>{titleHighlight}</span>}</h1>
+    {subtitle && <p class="page-banner__subtitle">{subtitle}</p>}
+  </div>
+</section>

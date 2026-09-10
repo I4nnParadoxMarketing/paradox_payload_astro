@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Environment & secrets
+.env
+.env.*
+!.env.example
+
+# Payload / SQLite
+.payload/
+payload/data/
+*.db
+*.db-*
+
+# Media uploads (local)
+media/
+
+# Build outputs
+dist/
+.next/
+.astro/
+
+# OS & editor
+.DS_Store
+Thumbs.db
+*.log
+
+# Cursor / agent artifacts (optional local)
+.agent-tools/

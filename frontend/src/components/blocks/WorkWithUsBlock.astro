@@ -1,0 +1,26 @@
+---
+const {
+  title = '',
+  titleHighlight = '',
+  subtitle = '',
+  subtitleHighlight = '',
+  bodyHtml = '',
+  ctaLabel = '',
+  ctaUrl = '',
+} = Astro.props
+---
+
+<div class="work-with-us">
+  <div class="container">
+    <div class="work-grid">
+      <div class="left-col">
+        <h2 class="section-title">{title} <span>{titleHighlight}</span></h2>
+      </div>
+      <div>
+        <h3>{subtitle} <span>{subtitleHighlight}</span></h3>
+        {bodyHtml && <div set:html={bodyHtml} />}
+        {ctaUrl && <a class="btn-talk" href={ctaUrl}>{ctaLabel}</a>}
+      </div>
+    </div>
+  </div>
+</div>

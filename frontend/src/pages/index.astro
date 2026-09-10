@@ -1,0 +1,12 @@
+---
+import Layout from '../layouts/Layout.astro'
+import BlockRenderer from '../components/BlockRenderer.astro'
+import { getPage, homepageFallback } from '../lib/payload'
+
+const page = (await getPage('home')) ?? homepageFallback
+const blocks = page.layout ?? []
+---
+
+<Layout title={page.meta?.title ?? page.title} description={page.meta?.description} isHome>
+  <BlockRenderer blocks={blocks} />
+</Layout>

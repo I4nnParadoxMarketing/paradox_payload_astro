@@ -1,0 +1,74 @@
+---
+const { services = [] } = Astro.props
+const serviceList = Array.isArray(services) ? services : []
+const defaultActive = serviceList[0]?.serviceKey || serviceList[0]?.id || 'website'
+---
+
+<div class="triangle-graphic">
+  <div class="container">
+    <div class="triangle-grid">
+      <div class="text-center">
+        <svg class="triangle-svg" viewBox="0 0 613 532" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g class="triangle-path" data-service="crm">
+            <path d="M312.413 526.513V453.86C310.634 452.749 308.074 451.411 304.728 450.414C304.226 450.264 303.73 450.129 303.238 450.011C301.826 449.664 300.332 450.217 299.515 451.416C293.5 460.247 283.121 465.88 271.474 465.187C255.385 464.236 242.456 451.023 241.84 434.932C241.147 416.945 255.54 402.14 273.393 402.14C284.331 402.14 293.965 407.7 299.628 416.144C300.456 417.374 301.93 418.019 303.373 417.673C303.75 417.585 304.133 417.487 304.521 417.374C308.001 416.376 310.644 414.831 312.413 413.581V347.258L356.144 321.746C355.27 331.626 357.763 341.62 363.509 350.244C371.752 362.605 385.623 369.989 400.62 369.989C407.871 369.989 415.07 368.191 421.447 364.796C432.24 359.039 440.013 349.407 443.343 337.667C446.674 325.927 445.117 313.659 438.958 303.118C434.252 295.067 427.239 288.83 418.995 285.079L465.861 257.738L604.751 495.421C612.803 509.203 602.858 526.513 586.888 526.513H312.413Z" fill="#2F77B5" />
+          </g>
+          <g class="triangle-path" data-service="ads">
+            <path d="M241.32 402.858C232.854 411.647 228.448 423.212 228.913 435.427C229.337 446.424 233.847 456.841 241.61 464.773C249.378 472.705 259.711 477.433 270.705 478.084C271.595 478.136 272.5 478.161 273.39 478.161C282.895 478.161 291.992 475.133 299.481 469.718V526.512H25.9002C9.93014 526.512 -0.0149461 509.202 8.03731 495.42L147.382 256.957L209.132 292.979C210.983 292.002 213.414 290.473 215.943 288.106C216.331 287.744 216.698 287.383 217.05 287.021C218.058 285.977 218.337 284.411 217.712 283.099C213.109 273.457 213.476 261.665 219.946 251.96C228.877 238.561 246.818 234.066 261.034 241.646C276.932 250.121 282.471 270.005 273.467 285.409C267.954 294.844 258.293 300.353 248.136 300.988C246.657 301.076 245.359 302.027 244.925 303.443C244.816 303.815 244.708 304.192 244.609 304.585C243.72 308.067 243.72 311.111 243.901 313.266L299.481 345.686V397.659C291.997 392.244 282.905 389.221 273.39 389.221C261.179 389.221 249.786 394.063 241.32 402.858Z" fill="#80CBE2" />
+          </g>
+          <g class="triangle-path active-path" data-service="website">
+            <path d="M427.96 309.634C436.963 325.038 431.425 344.922 415.527 353.396C401.31 360.977 383.37 356.481 374.438 343.082C367.958 333.368 367.601 321.56 372.214 311.908C372.84 310.605 372.545 309.055 371.537 308.017C371.185 307.655 370.818 307.293 370.435 306.937C368.087 304.735 365.827 303.263 364.028 302.286L307.46 335.285L264.396 310.161C272.836 306.435 280.014 300.121 284.803 291.92C290.963 281.384 292.519 269.117 289.189 257.371C285.863 245.636 278.085 236.004 267.292 230.248C260.921 226.853 253.716 225.055 246.466 225.055C231.473 225.055 217.598 232.434 209.354 244.799C203.515 253.563 201.038 263.743 202.036 273.783L154.074 245.802L288.703 15.4148C296.688 1.75234 316.449 1.75234 324.434 15.4148L459.517 246.582L398.367 282.257C398.223 284.371 398.28 287.218 399.102 290.458C399.205 290.845 399.309 291.228 399.422 291.6C399.852 293.016 401.155 293.961 402.634 294.054C412.786 294.685 422.452 300.193 427.965 309.634H427.96Z" fill="#EFB155" />
+          </g>
+        </svg>
+      </div>
+      <div class="skew-stack-wrapper">
+        {serviceList.map((service: { serviceKey?: string; id?: string; title: string; color: string; features?: { text: string }[]; ctaLabel?: string; ctaUrl?: string }, index: number) => {
+          const key = service.serviceKey || service.id || `service-${index}`
+          return (
+          <div
+            id={key}
+            class:list={['skew-card', `card-${key}`, { active: key === defaultActive, 'background-card': key !== defaultActive }]}
+          >
+            <div class="card-body">
+              <h3 style={`color: ${service.color}`}>{service.title}</h3>
+              <hr />
+              <ul>
+                {(service.features || []).map((f: { text: string }) => (
+                  <li>{f.text}</li>
+                ))}
+              </ul>
+              {service.ctaUrl && (
+                <a href={service.ctaUrl} class="btn-talk w-100">{service.ctaLabel}</a>
+              )}
+            </div>
+          </div>
+          )
+        })}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function switchSkewCard(serviceName: string) {
+    document.querySelectorAll('.skew-card').forEach((card) => {
+      card.classList.remove('active')
+      card.classList.add('background-card')
+    })
+    const selected = document.getElementById(serviceName)
+    selected?.classList.remove('background-card')
+    selected?.classList.add('active')
+    document.querySelectorAll('.triangle-path').forEach((g) => g.classList.remove('active-path'))
+    document.querySelector(`.triangle-path[data-service="${serviceName}"]`)?.classList.add('active-path')
+  }
+
+  document.querySelectorAll('.triangle-path').forEach((group) => {
+    group.addEventListener('click', () => {
+      const service = group.getAttribute('data-service')
+      if (service) switchSkewCard(service)
+    })
+  })
+</script>
+
+<style>
+  .w-100 { width: 100%; display: block; margin-top: 1rem; }
+</style>

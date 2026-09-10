@@ -1,0 +1,45 @@
+---
+import '../styles/paradox.css'
+import Header from '../components/Header.astro'
+
+interface Props {
+  title?: string
+  description?: string
+  isHome?: boolean
+}
+
+const {
+  title = 'Paradox Marketing',
+  description = 'Have Our Team Become YOUR Team',
+  isHome = false,
+} = Astro.props
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="icon" href="https://paradoxmarketing.io/wp-content/uploads/2025/02/FavIcon-180x180-1-150x150.png" />
+  </head>
+  <body class:list={['homepage-2026', { home: isHome }]}>
+    <Header isHome={isHome} />
+    <main id="content">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <img
+          class="footer-logo"
+          src="https://paradoxmarketing.io/wp-content/uploads/2026/03/footer-logo.png"
+          alt="Paradox Marketing"
+          width="200"
+          height="50"
+        />
+        <p>&copy; {new Date().getFullYear()} Paradox Marketing. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>

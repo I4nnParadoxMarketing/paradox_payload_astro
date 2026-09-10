@@ -1,0 +1,25 @@
+---
+const { title = '', titleHighlight = '', posts = [] } = Astro.props
+const postList = Array.isArray(posts) ? posts : []
+---
+
+<section class="insights-section">
+  <div class="container">
+    <h2 class="section-title">{title} <span>{titleHighlight}</span></h2>
+    <div class="insights-grid">
+      {postList.map((post: { title: string; date?: string; url?: string; imageUrl?: string }) => (
+        <a href={post.url || '#'} class="insight-card">
+          {post.imageUrl && (
+            <div class="insight-image">
+              <img src={post.imageUrl} alt={post.title} loading="lazy" decoding="async" />
+            </div>
+          )}
+          <div class="insight-body">
+            <h3>{post.title}</h3>
+            {post.date && <span class="insight-date">{post.date}</span>}
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

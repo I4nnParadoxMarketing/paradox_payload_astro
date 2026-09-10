@@ -1,0 +1,22 @@
+---
+const { title = '', titleHighlight = '', bodyHtml = '', imageUrl = '' } = Astro.props
+---
+
+<section class="who-we-are">
+  <div class="container">
+    <div class="who-we-are-content">
+      <div class="who-we-are-left">
+        <h2 class="section-title">{title} <span>{titleHighlight}</span></h2>
+        {bodyHtml && <div set:html={bodyHtml} />}
+      </div>
+      {imageUrl && (
+        <div
+          class="who-we-are-right"
+          style={`background-image: url('${imageUrl}')`}
+          role="img"
+          aria-label="Global team map"
+        />
+      )}
+    </div>
+  </div>
+</section>

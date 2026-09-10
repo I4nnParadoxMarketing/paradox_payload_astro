@@ -1,0 +1,22 @@
+---
+const { title = '', titleHighlight = '', bodyHtml = '', description } = Astro.props
+---
+
+<div class="what-we-do">
+  <div class="container">
+    <div class="what-we-do-content">
+      <div class="content-grid">
+        <div class="left-col">
+          <h2 class="section-title">{title} <span>{titleHighlight}</span></h2>
+        </div>
+        <div>
+          {bodyHtml ? (
+            <div set:html={bodyHtml} />
+          ) : description ? (
+            <div set:html={typeof description === 'string' ? description : ''} />
+          ) : null}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

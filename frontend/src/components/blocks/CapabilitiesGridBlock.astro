@@ -1,0 +1,21 @@
+---
+const { title = '', titleHighlight = '', items = [] } = Astro.props
+const list = Array.isArray(items) ? items : []
+---
+
+<section class="capabilities-grid-section">
+  <div class="container">
+    {(title || titleHighlight) && (
+      <h2 class="section-title">{title} <span>{titleHighlight}</span></h2>
+    )}
+    <div class="capabilities-grid">
+      {list.map((item: { title: string; description?: string; url?: string; color?: string }) => (
+        <a href={item.url || '#'} class="capability-card" style={item.color ? `--accent: ${item.color}` : undefined}>
+          <h3>{item.title}</h3>
+          {item.description && <p>{item.description}</p>}
+          <span class="capability-card__link">Learn more →</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

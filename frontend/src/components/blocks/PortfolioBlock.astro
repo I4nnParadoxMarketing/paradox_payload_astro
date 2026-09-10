@@ -1,0 +1,30 @@
+---
+const { title = '', titleHighlight = '', projects = [] } = Astro.props
+const projectList = Array.isArray(projects) ? projects : []
+---
+
+<div class="our-work">
+  <div class="container">
+    <h2 class="section-title">{title} <span>{titleHighlight}</span></h2>
+    <div class="portfolio-grid">
+      {projectList.map((project: { title: string; year?: string; services?: string; url?: string; imageUrl?: string }) => (
+        <a href={project.url || '#'} class="work-card">
+          <div class="work-image-wrap">
+            {project.imageUrl ? (
+              <img src={project.imageUrl} alt={project.title} loading="lazy" decoding="async" />
+            ) : (
+              <div class="work-image-placeholder" />
+            )}
+            <div class="work-overlay">
+              {project.services && <span class="work-category">{project.services}</span>}
+            </div>
+          </div>
+          <div class="work-footer">
+            <span class="work-title">{project.title}</span>
+            {project.year && <span class="work-year">{project.year}</span>}
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</div>

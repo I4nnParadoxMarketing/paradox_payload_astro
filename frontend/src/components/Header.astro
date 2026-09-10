@@ -1,0 +1,157 @@
+---
+import menuHtml from '../data/main-menu.html?raw'
+import '../styles/mmenu-custom.css'
+import '../styles/header-mmenu.css'
+
+interface Props {
+  isHome?: boolean
+}
+
+const { isHome = false } = Astro.props
+---
+
+<header
+  id="new-header"
+  class:list={['header2026', { 'header-on-home': isHome }]}
+>
+  <div class="container">
+    <div class="header-content">
+      <div class="site-logo">
+        <a href="/" class="logo-link">
+          <img
+            src="https://paradoxmarketing.io/wp-content/uploads/2026/03/footer-logo.png"
+            alt="Paradox Marketing Logo"
+            class="logo-img"
+            width="180"
+            height="50"
+            decoding="async"
+          />
+        </a>
+      </div>
+      <Fragment set:html={menuHtml} />
+      <a href="#menu" id="menu-ham" aria-label="Paradox Marketing Toggle Menu"><span></span></a>
+    </div>
+  </div>
+</header>
+
+<div class="header-spacer"></div>
+
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/jQuery.mmenu/9.3.0/mmenu.css"
+/>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/jQuery.mmenu/9.3.0/mmenu.js"
+  defer
+></script>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const header = document.getElementById('new-header')
+    const scrollThreshold = 50
+
+    if (header) {
+      window.addEventListener(
+        'scroll',
+        () => {
+          if (window.pageYOffset > scrollThreshold) {
+            header.classList.add('scrolled')
+          } else {
+            header.classList.remove('scrolled')
+          }
+        },
+        { passive: true },
+      )
+    }
+
+    let attempts = 0
+    const maxAttempts = 10
+    const intervalMs = 2000
+    let interval = null
+
+    const handleMaxAttempts = () => {
+      if (attempts >= maxAttempts && interval) {
+        clearInterval(interval)
+      }
+    }
+
+    const tryInit = () => {
+      attempts++
+
+      if (typeof Mmenu === 'undefined') {
+        setTimeout(tryInit, 50)
+        return
+      }
+
+      const menuEl = document.querySelector('#menu')
+      if (!menuEl) {
+        handleMaxAttempts()
+        return false
+      }
+
+      try {
+        const m = new Mmenu('#menu', {
+          extensions: ['fx-panels-slide', 'fx-listitems-slide', 'fx-listitems-drop'],
+          slidingSubmenus: true,
+          offCanvas: {
+            position: 'right-front',
+            effect: 'fx-listitems-drop',
+          },
+          theme: 'white',
+          navbar: {
+            title: '&nbsp;',
+          },
+          navbars: [
+            {
+              position: 'top',
+              content: [
+                "<p>From Complex Challenges To Simple Solutions</p><p>We've Got You Covered</p><a href='#' id='close-menu'></a>",
+              ],
+            },
+            {
+              position: 'top',
+              content: ['prev', 'title'],
+            },
+            {
+              position: 'bottom',
+              content: ["<a href='/contact-us/' class='hero-btn-book-a-call'>Contact Us</a>"],
+            },
+          ],
+        })
+
+        const api = m.API
+
+        m.bind('init:after', () => {
+          document.body.classList.add('menu-loaded')
+        })
+
+        setTimeout(() => {
+          const closeBtn = document.querySelector('#close-menu')
+          if (closeBtn) {
+            closeBtn.addEventListener('click', (e) => {
+              e.preventDefault()
+              api.close()
+            })
+          }
+        }, 50)
+
+        const slideout = document.querySelector('.mm-slideout')
+        if (slideout) slideout.classList.remove('mm-page')
+
+        const wrapperMenu = document.querySelector('.mm-wrapper #menu')
+        if (wrapperMenu) wrapperMenu.classList.remove('mm-hidden')
+
+        if (interval) clearInterval(interval)
+        return true
+      } catch (e) {
+        console.error('Menu init failed:', e)
+        handleMaxAttempts()
+        return false
+      }
+    }
+
+    if (!tryInit()) {
+      interval = setInterval(tryInit, intervalMs)
+    }
+  })
+</script>

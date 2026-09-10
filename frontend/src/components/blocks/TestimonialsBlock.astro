@@ -1,0 +1,34 @@
+---
+const { title = '', titleHighlight = '', clutchLogoUrl = '', reviews = [] } = Astro.props
+const reviewList = Array.isArray(reviews) ? reviews : []
+const carouselItems = [...reviewList, ...reviewList]
+---
+
+<div class="reviews">
+  <div class="inner">
+    <h2 class="section-title">{title} <span>{titleHighlight}</span></h2>
+    {clutchLogoUrl && (
+      <div class="clutch-badge">
+        <img src={clutchLogoUrl} alt="Clutch Review" height="50" width="187" loading="lazy" />
+      </div>
+    )}
+    <div class="reviews-carousel-wrap">
+      <div class="reviews-carousel">
+        {carouselItems.map((review: { rating?: number; text: string; author: string; position?: string }) => (
+          <div class="review-card">
+            <div class="card-rating">
+              <span class="rating-num">{review.rating?.toFixed(1) || '5.0'}</span>
+              <div class="stars-row">★★★★★</div>
+            </div>
+            <p class="review-text">"{review.text}"</p>
+            <div class="reviewer-info">
+              <span class="post-title">{review.author}</span>
+              {review.position && <span class="reviewer-position">{review.position}</span>}
+              <span class="reviewer-position verified">✓ Verified Review</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+---
+const { title = '', titleHighlight = '', items = [] } = Astro.props
+const problemItems = Array.isArray(items) ? items : []
+---
+
+<section class="problems">
+  <div class="container">
+    <h2 class="section-title">{title} <span set:html={titleHighlight.replace(/\n/g, '<br>')} /></h2>
+    <div class="problems-grid">
+      {problemItems.map((item: { title: string; imageUrl: string }) => (
+        <div class="problem-card">
+          <img src={item.imageUrl} alt={item.title} loading="lazy" decoding="async" />
+          <h3>{item.title}</h3>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

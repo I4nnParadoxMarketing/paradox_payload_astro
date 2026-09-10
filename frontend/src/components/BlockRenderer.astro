@@ -1,0 +1,72 @@
+---
+import type { PageBlock } from '../lib/payload'
+import HeroBlock from './blocks/HeroBlock.astro'
+import LogoMarqueeBlock from './blocks/LogoMarqueeBlock.astro'
+import WhatWeDoBlock from './blocks/WhatWeDoBlock.astro'
+import ServiceTriangleBlock from './blocks/ServiceTriangleBlock.astro'
+import ProblemsBlock from './blocks/ProblemsBlock.astro'
+import MetricsBlock from './blocks/MetricsBlock.astro'
+import WorkWithUsBlock from './blocks/WorkWithUsBlock.astro'
+import TestimonialsBlock from './blocks/TestimonialsBlock.astro'
+import TechnologyBlock from './blocks/TechnologyBlock.astro'
+import PortfolioBlock from './blocks/PortfolioBlock.astro'
+import WhoWeAreBlock from './blocks/WhoWeAreBlock.astro'
+import InsightsBlock from './blocks/InsightsBlock.astro'
+import PageBannerBlock from './blocks/PageBannerBlock.astro'
+import ContactSectionBlock from './blocks/ContactSectionBlock.astro'
+import RichContentBlock from './blocks/RichContentBlock.astro'
+import CapabilitiesGridBlock from './blocks/CapabilitiesGridBlock.astro'
+import TeamSectionBlock from './blocks/TeamSectionBlock.astro'
+import CtaBannerBlock from './blocks/CtaBannerBlock.astro'
+
+interface Props {
+  blocks: PageBlock[]
+}
+
+const { blocks } = Astro.props
+---
+
+{
+  blocks.map((block) => {
+    switch (block.blockType) {
+      case 'hero':
+        return <HeroBlock {...block} />
+      case 'logoMarquee':
+        return <LogoMarqueeBlock {...block} />
+      case 'whatWeDo':
+        return <WhatWeDoBlock {...block} />
+      case 'serviceTriangle':
+        return <ServiceTriangleBlock {...block} />
+      case 'problems':
+        return <ProblemsBlock {...block} />
+      case 'metrics':
+        return <MetricsBlock {...block} />
+      case 'workWithUs':
+        return <WorkWithUsBlock {...block} />
+      case 'testimonials':
+        return <TestimonialsBlock {...block} />
+      case 'technology':
+        return <TechnologyBlock {...block} />
+      case 'portfolio':
+        return <PortfolioBlock {...block} />
+      case 'whoWeAre':
+        return <WhoWeAreBlock {...block} />
+      case 'insights':
+        return <InsightsBlock {...block} />
+      case 'pageBanner':
+        return <PageBannerBlock {...block} />
+      case 'contactSection':
+        return <ContactSectionBlock {...block} />
+      case 'richContent':
+        return <RichContentBlock {...block} />
+      case 'capabilitiesGrid':
+        return <CapabilitiesGridBlock {...block} />
+      case 'teamSection':
+        return <TeamSectionBlock {...block} />
+      case 'ctaBanner':
+        return <CtaBannerBlock {...block} />
+      default:
+        return null
+    }
+  })
+}

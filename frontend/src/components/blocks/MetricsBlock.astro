@@ -1,0 +1,29 @@
+---
+const { categories = [], ctaLabel = '', ctaUrl = '' } = Astro.props
+const cats = Array.isArray(categories) ? categories : []
+---
+
+<div class="records">
+  <div class="container-wrapper">
+    <div class="container">
+      <div class="metrics-grid">
+        {cats.map((cat: { title: string; stats?: { value: string; label: string }[] }) => (
+          <div class="category-card">
+            <h3>{cat.title}</h3>
+            {(cat.stats || []).map((stat: { value: string; label: string }) => (
+              <div class="stat-box">
+                <span class="stat-number">{stat.value}</span>
+                <span class="stat-label">{stat.label}</span>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+      {ctaUrl && (
+        <div class="cta-wrap">
+          <a href={ctaUrl} class="btn-talk">{ctaLabel}</a>
+        </div>
+      )}
+    </div>
+  </div>
+</div>

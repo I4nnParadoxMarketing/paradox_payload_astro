@@ -1,0 +1,11 @@
+---
+const { eyebrow = '', title = '', bodyHtml = '' } = Astro.props
+---
+
+<section class="rich-content">
+  <div class="container rich-content__inner">
+    {eyebrow && <p class="rich-content__eyebrow">{eyebrow}</p>}
+    {title && <h2 class="rich-content__title">{title}</h2>}
+    <div class="rich-content__body" set:html={bodyHtml} />
+  </div>
+</section>

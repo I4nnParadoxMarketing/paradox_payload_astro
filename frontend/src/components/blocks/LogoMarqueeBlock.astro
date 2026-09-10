@@ -1,0 +1,27 @@
+---
+const { label = '', labelHighlight = '', logos = [] } = Astro.props
+const logoList = Array.isArray(logos) ? logos : []
+const doubled = [...logoList, ...logoList]
+---
+
+<div class="what-we-do">
+  <div class="container container-inner">
+    <div class="logos">
+      <p>{label} {labelHighlight && <span>{labelHighlight}</span>}</p>
+      <div class="logos-marquee">
+        <div class="logos-track">
+          {doubled.map((logo: { url?: string; width?: number; height?: number; alt?: string }) => (
+            <img
+              src={logo.url}
+              width={logo.width}
+              height={logo.height}
+              alt={logo.alt || ''}
+              loading="eager"
+              decoding="async"
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

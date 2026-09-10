@@ -1,0 +1,143 @@
+/* Header layout — matches live paradoxmarketing.io header2026 */
+.header2026 {
+  background-color: #001523;
+  position: fixed;
+  top: 0;
+  z-index: 9999;
+  width: 100%;
+  min-height: 90px;
+}
+
+.home .header2026 {
+  background-color: transparent !important;
+}
+
+.home .header2026.scrolled {
+  background-color: #001523 !important;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  min-height: 90px;
+}
+
+.header2026 .site-logo {
+  height: 70px;
+  width: 300px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  min-width: 180px;
+}
+
+.header2026 .logo-link {
+  display: block;
+}
+
+.header2026 .logo-img {
+  max-height: 100px;
+  height: 40px;
+  width: 350px;
+  aspect-ratio: 250 / 50;
+  display: block;
+}
+
+.header-spacer {
+  height: 90px;
+  width: 100%;
+}
+
+/* Prevent flicker before mmenu init */
+#menu {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.mm-wrapper #menu {
+  visibility: visible;
+  opacity: 1;
+}
+
+.mm-slideout {
+  z-index: 2;
+}
+
+.mm-navbars--top .mm-navbar span p:first-child {
+  padding-right: 40px;
+  margin-bottom: 0 !important;
+}
+
+.mm-navbars--top .mm-navbar span p:nth-child(2) {
+  color: #efb155 !important;
+}
+
+.mm-wrapper #menu {
+  background: #01162b !important;
+}
+
+.mm-menu a {
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+  font-size: 24px !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  line-height: 26px !important;
+}
+
+.mm-navbars--top .mm-navbar span {
+  color: #fff !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+  font-size: 18px !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  line-height: 28px !important;
+}
+
+a.mm-listitem__text {
+  border-bottom: 1px solid #000d1a;
+}
+
+.mm-navbars--top .mm-navbar:first-child {
+  border-bottom: 1px solid #fff !important;
+}
+
+#close-menu:before,
+#close-menu:after {
+  height: 20px !important;
+}
+
+@media (max-width: 1800px) {
+  .mm-navbars--top .mm-navbar span {
+    font-size: 16px !important;
+    line-height: 26px !important;
+  }
+
+  .mm-menu a {
+    font-size: 18px !important;
+    line-height: 26px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .header2026 {
+    min-height: 60px !important;
+  }
+
+  .header-content {
+    min-height: 60px !important;
+  }
+
+  .header-spacer {
+    height: 60px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  a.hero-btn-book-a-call {
+    min-width: 100% !important;
+  }
+}

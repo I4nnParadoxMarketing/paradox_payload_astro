@@ -1,0 +1,56 @@
+---
+const {
+  heading = '',
+  headingHighlight = '',
+  description = '',
+  ctaLabel = "Let's Talk",
+  ctaUrl = '#',
+  videoPoster = '',
+  videoUrl = '',
+  triangleImage = '',
+} = Astro.props
+---
+
+<section class="hero-video">
+  <video
+    class="hero-bg-video"
+    autoplay
+    muted
+    loop
+    playsinline
+    poster={videoPoster}
+    preload="metadata"
+  >
+    {videoUrl && <source src={videoUrl} type="video/mp4" />}
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <h1>{heading} <span>{headingHighlight}</span></h1>
+          <p>{description}</p>
+          {ctaUrl && <a class="btn-talk" href={ctaUrl}>{ctaLabel}</a>}
+        </div>
+        {triangleImage && (
+          <div>
+            <img src={triangleImage} alt="Paradox Marketing Strategy Triangle" width="500" height="500" fetchpriority="high" />
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const video = document.querySelector('.hero-bg-video') as HTMLVideoElement | null
+    if (video && !video.querySelector('source') && video.dataset.src) {
+      const source = document.createElement('source')
+      source.src = video.dataset.src
+      source.type = 'video/mp4'
+      video.appendChild(source)
+      video.load()
+    }
+  })
+</script>

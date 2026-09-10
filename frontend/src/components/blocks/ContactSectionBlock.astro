@@ -1,0 +1,123 @@
+---
+import '../../styles/hubspot-contact.css'
+
+const {
+  title = '',
+  titleHighlight = '',
+  bodyHtml = '',
+  phone = '',
+  phoneTel = '',
+  ctaLabel = "Let's Talk",
+  ctaUrl = '#',
+  hubspotPortalId = '431748',
+  hubspotFormId = 'add70aed-7818-46f7-aa5d-d79337b357d2',
+} = Astro.props
+---
+
+<section class="contact-section">
+  <div class="contact-bg contact-bg-top" aria-hidden="true">
+    <img src="/images/contact-bg-top.svg" alt="" width="468" height="737" decoding="async" />
+  </div>
+  <div class="contact-bg contact-bg-bottom" aria-hidden="true">
+    <img src="/images/contact-bg-bottom.svg" alt="" width="834" height="475" decoding="async" />
+  </div>
+  <div class="container contact-section-inner">
+    <div class="contact-grid">
+      <div class="contact-content">
+        <h1>{title} <span>{titleHighlight}</span></h1>
+        <div class="contact-body" set:html={bodyHtml} />
+        {phone && phoneTel && (
+          <p class="contact-phone">
+            <a href={`tel:${phoneTel}`}><strong>CALL NOW: {phone}</strong></a>
+          </p>
+        )}
+        {ctaUrl && <a class="btn-talk" href={ctaUrl}>{ctaLabel}</a>}
+      </div>
+      <div class="contact-form-wrap">
+        <div class="contact-form-card contact-form">
+          <div id="hubspot-form-container" class="hubspot-form-container">
+            <p class="form-loading">Loading form…</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ hubspotPortalId, hubspotFormId }}>
+  function stripHubspotInlineStyles(form) {
+    const root = form?.get?.(0) ?? form
+    if (!root || !root.querySelectorAll) return
+
+    const strip = () => {
+      root.querySelectorAll('[style]').forEach((el) => {
+        // Don't strip iframe styles — HubSpot uses inline styles to keep submit iframes hidden
+        if (el.tagName === 'IFRAME') return
+        el.removeAttribute('style')
+      })
+      root.classList.add('paradox-hubspot-form')
+    }
+
+    hideHubspotIframes()
+
+    strip()
+    // HubSpot sometimes re-applies theme inline styles after onFormReady
+    requestAnimationFrame(strip)
+    setTimeout(strip, 100)
+  }
+
+  function hideHubspotIframes() {
+    document
+      .querySelectorAll(
+        'iframe[id^="target_iframe_"], iframe[name^="target_iframe_"], iframe[src*="hsforms"], iframe[src*="hubspot"]',
+      )
+      .forEach((iframe) => {
+        iframe.setAttribute('aria-hidden', 'true')
+        iframe.setAttribute('tabindex', '-1')
+        iframe.style.display = 'none'
+        iframe.style.visibility = 'hidden'
+        iframe.style.width = '0'
+        iframe.style.height = '0'
+        iframe.style.border = '0'
+        iframe.style.position = 'fixed'
+        iframe.style.top = '-9999px'
+        iframe.style.left = '-9999px'
+      })
+  }
+
+  function loadHubspotForm() {
+    if (typeof hbspt === 'undefined') {
+      const script = document.createElement('script')
+      script.src = 'https://js.hsforms.net/forms/embed/v2.js'
+      script.onload = createForm
+      document.head.appendChild(script)
+    } else {
+      createForm()
+    }
+  }
+
+  function createForm() {
+    const container = document.getElementById('hubspot-form-container')
+    if (!container || typeof hbspt === 'undefined') return
+    container.innerHTML = ''
+    hbspt.forms.create({
+      region: 'na1',
+      portalId: hubspotPortalId,
+      formId: hubspotFormId,
+      target: '#hubspot-form-container',
+      css: '',
+      cssRequired: '',
+      onFormReady: (form) => {
+        stripHubspotInlineStyles(form)
+        hideHubspotIframes()
+        setTimeout(hideHubspotIframes, 250)
+      },
+    })
+  }
+
+  document.addEventListener('DOMContentLoaded', loadHubspotForm)
+
+  // HubSpot injects the submit iframe after the form renders
+  const iframeObserver = new MutationObserver(hideHubspotIframes)
+  iframeObserver.observe(document.body, { childList: true, subtree: true })
+</script>

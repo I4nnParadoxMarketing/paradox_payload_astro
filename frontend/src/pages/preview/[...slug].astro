@@ -1,0 +1,21 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import BlockRenderer from '../../components/BlockRenderer.astro'
+import { getPagePreview, getFallbackPage } from '../../lib/payload'
+
+const slugParam = Astro.params.slug
+const slug = Array.isArray(slugParam) ? slugParam.join('/') : slugParam ?? ''
+
+const page = (await getPagePreview(slug)) ?? getFallbackPage(slug)
+
+if (!page) {
+  return Astro.redirect('/404')
+}
+
+const blocks = page.layout ?? []
+---
+
+<Layout title={`Preview: ${page.meta?.title ?? page.title}`} description={page.meta?.description}>
+  <div class="preview-bar">Draft preview — Payload CMS live preview</div>
+  <BlockRenderer blocks={blocks} />
+</Layout>
