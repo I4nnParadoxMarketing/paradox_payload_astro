@@ -1,0 +1,112 @@
+---
+interface RecentInsight {
+  title: string
+  url: string
+  date?: string
+}
+
+interface Props {
+  title: string
+  subtitle?: string
+  dateLabel?: string
+  imageUrl?: string
+  bodyHtml?: string
+  capabilityLabel?: string
+  capabilityUrl?: string
+  recentInsights?: RecentInsight[]
+}
+
+const {
+  title,
+  subtitle = '',
+  dateLabel = '',
+  imageUrl = '',
+  bodyHtml = '',
+  capabilityLabel = '',
+  capabilityUrl = '',
+  recentInsights = [],
+} = Astro.props
+
+const shareUrl = Astro.url.href
+---
+
+<section class="post-content">
+  <div class="container insight-layout">
+    <article class="article-content">
+      <h1 class="article-title">{title}</h1>
+      {subtitle && <p class="article-excerpt">{subtitle}</p>}
+
+      {(dateLabel || capabilityLabel) && (
+        <div class="post-meta">
+          <ul>
+            {dateLabel && <li>{dateLabel}</li>}
+            {capabilityLabel && (
+              <li>
+                {capabilityUrl ? (
+                  <a href={capabilityUrl}>{capabilityLabel}</a>
+                ) : (
+                  capabilityLabel
+                )}
+              </li>
+            )}
+          </ul>
+        </div>
+      )}
+
+      {imageUrl && (
+        <div class="post-thumbnail">
+          <img src={imageUrl} alt={title} loading="lazy" decoding="async" />
+        </div>
+      )}
+
+      {bodyHtml && <div class="article-body" set:html={bodyHtml} />}
+    </article>
+
+    <aside class="insight-sidebar">
+      <div class="social-share">
+        <h2 class="sidebar-heading">Share</h2>
+        <div class="social-share-buttons">
+          <a
+            class="social-share-button"
+            href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Share on LinkedIn"
+          >
+            in
+          </a>
+          <a
+            class="social-share-button"
+            href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Share on Facebook"
+          >
+            f
+          </a>
+          <a
+            class="social-share-button"
+            href={`mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(shareUrl)}`}
+            aria-label="Share by email"
+          >
+            @
+          </a>
+        </div>
+      </div>
+
+      {recentInsights.length > 0 && (
+        <div class="recent-posts-widget">
+          <h2 class="sidebar-heading">Recent Insights</h2>
+          <ul>
+            {recentInsights.map((post) => (
+              <li>
+                <a href={post.url}>{post.title}</a>
+                {post.date && <span class="recent-date">{post.date}</span>}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </aside>
+  </div>
+</section>

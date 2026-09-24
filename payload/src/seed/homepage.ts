@@ -354,11 +354,15 @@ async function upsertPage(payload: Awaited<ReturnType<typeof getPayload>>, data:
     limit: 1,
   })
 
+  // Seed layouts are loosely typed relative to generated Page unions.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const pageData = data as any
+
   if (existing.docs.length > 0) {
-    await payload.update({ collection: 'pages', id: existing.docs[0].id, data })
+    await payload.update({ collection: 'pages', id: existing.docs[0].id, data: pageData })
     console.log(`Updated: ${data.slug}`)
   } else {
-    await payload.create({ collection: 'pages', data })
+    await payload.create({ collection: 'pages', data: pageData })
     console.log(`Created: ${data.slug}`)
   }
 }
@@ -439,7 +443,8 @@ async function seed() {
     const menuData = JSON.parse(fs.readFileSync(menuPath, 'utf8')) as { items: unknown[] }
     await payload.updateGlobal({
       slug: 'main-menu',
-      data: { items: menuData.items },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      data: { items: menuData.items as any },
     })
     console.log(`Seeded Main Menu with ${menuData.items.length} top-level items`)
   } catch (err) {

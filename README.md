@@ -7,7 +7,7 @@ Read-only replication of [paradoxmarketing.io](https://paradoxmarketing.io/) usi
 ```
 Payload + Astro/
 ├── payload/     # Payload CMS 3 (Next.js) — admin + REST API on :3000
-└── frontend/    # Astro SSR site on :4321
+└── frontend/    # Astro SSR site on :4322
 ```
 
 ### Homepage blocks (matching live site)
@@ -95,7 +95,7 @@ cp frontend/.env.example frontend/.env
 npm run dev:frontend
 ```
 
-Site: http://localhost:4321
+Site: http://localhost:4322
 
 The frontend falls back to bundled homepage content when Payload is unavailable, so you can preview the design immediately.
 
