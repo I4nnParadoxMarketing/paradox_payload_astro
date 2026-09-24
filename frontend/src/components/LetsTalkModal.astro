@@ -1,0 +1,192 @@
+---
+/**
+ * HubSpot "Let's Talk" popup — matches paradoxmarketing.io modal markup.
+ * Triggered by [data-lets-talk] / [data-bs-target="#letsTalkModal"] buttons.
+ */
+const portalId = '431748'
+const formId = '286292ac-5334-41bf-a36a-a724aeadd305'
+---
+
+<div
+  class="modal fade"
+  id="letsTalkModal"
+  tabindex="-1"
+  aria-hidden="true"
+  aria-labelledby="letsTalkModalLabel"
+  role="dialog"
+>
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 600px;">
+    <div class="modal-content">
+      <button type="button" class="lets-talk-close" data-lets-talk-close aria-label="Close">
+        ×
+      </button>
+      <div class="modal-body" style="padding: 20px;">
+        <h2 id="letsTalkModalLabel" class="lets-talk-title">Let's Talk</h2>
+        <div id="hubspot-popup">
+          <div class="hs-form-loading" style="text-align: center; padding: 40px; color: #787878;">
+            Loading form...
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style is:global>
+  #letsTalkModal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 21, 35, 0.55);
+    padding: 16px;
+  }
+
+  #letsTalkModal.is-open {
+    display: flex;
+  }
+
+  #letsTalkModal .modal-dialog {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  #letsTalkModal .modal-content {
+    position: relative;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+  }
+
+  #letsTalkModal .lets-talk-close {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    z-index: 2;
+    border: 0;
+    background: transparent;
+    font-size: 28px;
+    line-height: 1;
+    color: #666;
+    cursor: pointer;
+    padding: 4px 8px;
+  }
+
+  #letsTalkModal .lets-talk-title {
+    margin: 0 0 12px;
+    font-size: 28px;
+    font-weight: 700;
+    color: #122c4e;
+  }
+
+  body.lets-talk-open {
+    overflow: hidden;
+  }
+</style>
+
+<script define:vars={{ portalId, formId }}>
+  ;(function () {
+    let formInitialized = false
+    let hsScriptLoading = false
+
+    function loadHubspotScript(cb) {
+      if (typeof hbspt !== 'undefined') {
+        cb()
+        return
+      }
+      if (hsScriptLoading) {
+        const check = setInterval(() => {
+          if (typeof hbspt !== 'undefined') {
+            clearInterval(check)
+            cb()
+          }
+        }, 100)
+        return
+      }
+      hsScriptLoading = true
+      const s = document.createElement('script')
+      s.src = 'https://js.hsforms.net/forms/embed/v2.js'
+      s.async = true
+      s.onload = () => cb()
+      document.head.appendChild(s)
+    }
+
+    function initForm() {
+      if (formInitialized || typeof hbspt === 'undefined') return
+      const target = document.getElementById('hubspot-popup')
+      if (!target) return
+      target.innerHTML = ''
+      hbspt.forms.create({
+        portalId: String(portalId),
+        formId: String(formId),
+        region: 'na1',
+        target: '#hubspot-popup',
+        onFormSubmitted: function (_form, data) {
+          const values = (data && data.submissionValues) || {}
+          const redirectUrl =
+            'https://hs.paradoxmarketing.io/discovery-call' +
+            '?firstname=' +
+            encodeURIComponent(values.firstname || '') +
+            '&lastname=' +
+            encodeURIComponent(values.lastname || '') +
+            '&email=' +
+            encodeURIComponent(values.email || '') +
+            '&company=' +
+            encodeURIComponent(values.company || '')
+          window.location.href = redirectUrl
+        },
+      })
+      formInitialized = true
+    }
+
+    function openModal() {
+      const modal = document.getElementById('letsTalkModal')
+      if (!modal) return
+      modal.classList.add('is-open')
+      modal.setAttribute('aria-hidden', 'false')
+      document.body.classList.add('lets-talk-open')
+      loadHubspotScript(initForm)
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('letsTalkModal')
+      if (!modal) return
+      modal.classList.remove('is-open')
+      modal.setAttribute('aria-hidden', 'true')
+      document.body.classList.remove('lets-talk-open')
+    }
+
+    document.addEventListener('click', (e) => {
+      const target = e.target
+      if (!(target instanceof Element)) return
+
+      if (target.closest('[data-lets-talk-close]')) {
+        e.preventDefault()
+        closeModal()
+        return
+      }
+
+      const trigger = target.closest(
+        '[data-lets-talk], [data-bs-target="#letsTalkModal"], a[href="#letsTalkModal"]',
+      )
+      if (trigger) {
+        e.preventDefault()
+        openModal()
+        return
+      }
+
+      const modal = document.getElementById('letsTalkModal')
+      if (modal && modal.classList.contains('is-open') && target === modal) {
+        closeModal()
+      }
+    })
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal()
+    })
+  })()
+</script>

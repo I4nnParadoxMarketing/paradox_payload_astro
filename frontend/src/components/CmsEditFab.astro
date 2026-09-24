@@ -1,0 +1,55 @@
+---
+interface Props {
+  collection: string
+  id: string | number
+  label?: string
+}
+
+const { collection, id, label = 'Edit in CMS' } = Astro.props
+
+const payloadUrl = (
+  import.meta.env.PUBLIC_PAYLOAD_URL ||
+  import.meta.env.PAYLOAD_URL ||
+  'http://localhost:3000'
+).replace(/\/$/, '')
+
+const href = `${payloadUrl}/admin/collections/${collection}/${id}`
+---
+
+<a class="cms-edit-fab" href={href} target="_blank" rel="noopener noreferrer">
+  {label}
+</a>
+
+<style>
+  .cms-edit-fab {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 9998;
+    background: #001523;
+    color: #fff !important;
+    text-decoration: none !important;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 12px 18px;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 21, 35, 0.28);
+    opacity: 0.92;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .cms-edit-fab:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 767px) {
+    .cms-edit-fab {
+      right: 12px;
+      bottom: 12px;
+      font-size: 12px;
+      padding: 10px 14px;
+    }
+  }
+</style>

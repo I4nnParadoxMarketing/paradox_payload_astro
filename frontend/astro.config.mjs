@@ -4,5 +4,5 @@ import vercel from '@astrojs/vercel'
 export default defineConfig({
   output: 'server',
   adapter: vercel(),
-  server: { port: 4322 },
+  server: { host: true, port: 4322 },
 })

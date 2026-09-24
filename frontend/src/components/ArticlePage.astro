@@ -1,0 +1,43 @@
+---
+interface Props {
+  title: string
+  subtitle?: string
+  imageUrl?: string
+  bodyHtml?: string
+  eyebrow?: string
+}
+
+const {
+  title,
+  subtitle = '',
+  imageUrl = '',
+  bodyHtml = '',
+  eyebrow = '',
+} = Astro.props
+---
+
+<section class="page-inner-banner">
+  <div class="page-inner-banner-content">
+    {eyebrow && <p class="page-inner-banner-desc" style="margin-bottom: 12px; opacity: 0.85;">{eyebrow}</p>}
+    <h1 class="page-inner-title-banner">{title}</h1>
+    {subtitle && <p class="page-inner-banner-desc">{subtitle}</p>}
+  </div>
+</section>
+
+{
+  imageUrl && (
+    <div class="article-hero-image">
+      <img src={imageUrl} alt={title} loading="lazy" decoding="async" />
+    </div>
+  )
+}
+
+{
+  bodyHtml && (
+    <section class="rich-content">
+      <div class="container rich-content__inner">
+        <div class="rich-content__body" set:html={bodyHtml} />
+      </div>
+    </section>
+  )
+}
