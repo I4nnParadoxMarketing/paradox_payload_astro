@@ -1,0 +1,33 @@
+---
+interface Props {
+  collection: string
+  id: string | number
+  label?: string
+}
+
+const { collection, id, label = 'Edit page' } = Astro.props
+const base = (import.meta.env.PUBLIC_PAYLOAD_URL || 'http://localhost:3000').replace(/\/$/, '')
+const href = `${base}/admin/collections/${collection}/${id}`
+---
+
+<a class="cms-edit-fab" href={href} target="_blank" rel="noopener noreferrer">{label}</a>
+
+<style>
+  .cms-edit-fab {
+    position: fixed;
+    right: 1.25rem;
+    bottom: 1.25rem;
+    z-index: 9000;
+    background: #2f77b5;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    padding: 0.75rem 1rem;
+    border-radius: 999px;
+    box-shadow: 0 8px 24px rgba(0, 21, 35, 0.25);
+  }
+
+  .cms-edit-fab:hover {
+    background: #001523;
+  }
+</style>

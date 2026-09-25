@@ -1,0 +1,18 @@
+---
+const {
+  heading = '',
+  ctaLabel = "Let's Talk",
+  ctaUrl = '#',
+} = Astro.props
+---
+
+<section class="cta-banner">
+  <div class="container cta-banner__inner">
+    {heading && <h2>{heading}</h2>}
+    {ctaUrl && (
+      <a class="btn-talk" href={ctaUrl}>
+        {ctaLabel}
+      </a>
+    )}
+  </div>
+</section>

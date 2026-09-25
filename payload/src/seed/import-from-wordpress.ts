@@ -352,6 +352,50 @@ async function importPages(payload: Payload) {
   console.log(`Pages: imported ${count} items`)
 }
 
+async function importIndustries(payload: Payload) {
+  const posts = await fetchAllWPPosts('industries', { embed: false })
+  let count = 0
+
+  for (const post of posts) {
+    const slug = `industries/${post.slug}`
+    const title = decodeHtml(post.title?.rendered ?? post.slug)
+    const bodyHtml = sanitizeHtml(post.content?.rendered)
+    if (!bodyHtml) {
+      console.warn(`Skipping empty industry: ${slug}`)
+      continue
+    }
+
+    const bannerHeading = post.acf?.banner_heading
+    const banner = typeof bannerHeading === 'string' && bannerHeading.trim() ? bannerHeading : title
+
+    await upsertBySlug(payload, 'pages', slug, {
+      title,
+      slug,
+      status: 'published',
+      layout: [
+        {
+          blockType: 'pageBanner',
+          title: banner,
+          titleHighlight: '',
+          subtitle: post.yoast_head_json?.description || '',
+        },
+        {
+          blockType: 'richContent',
+          title: '',
+          bodyHtml,
+        },
+      ],
+      meta: {
+        title: post.yoast_head_json?.title || title,
+        description: post.yoast_head_json?.description,
+      },
+    })
+    count += 1
+  }
+
+  console.log(`Industries: imported ${count} items`)
+}
+
 async function run() {
   const payload = await getPayload({ config })
   const only = process.argv[2]?.toLowerCase()
@@ -362,6 +406,13 @@ async function run() {
     ['people', importPeople],
     ['pages', importPages],
   ]
+
+  if (only === 'industries') {
+    console.log('Importing industries from WordPress...')
+    await importIndustries(payload)
+    console.log('WordPress import complete.')
+    process.exit(0)
+  }
 
   console.log(
     only

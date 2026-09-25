@@ -1,0 +1,136 @@
+---
+import '../styles/hubspot-contact.css'
+
+const hubspotPortalId = '431748'
+const hubspotFormId = 'add70aed-7818-46f7-aa5d-d79337b357d2'
+---
+
+<div id="letsTalkModal" class="lets-talk-modal" hidden>
+  <div class="lets-talk-modal__backdrop" data-lets-talk-close></div>
+  <div
+    class="lets-talk-modal__dialog"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="lets-talk-title"
+  >
+    <button type="button" class="lets-talk-modal__close" data-lets-talk-close aria-label="Close">
+      ×
+    </button>
+    <h2 id="lets-talk-title">Let's Talk</h2>
+    <div id="lets-talk-hubspot-form" class="hubspot-form-container contact-form">
+      <p class="form-loading">Loading form…</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .lets-talk-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: grid;
+    place-items: center;
+    padding: 1.5rem;
+  }
+
+  .lets-talk-modal[hidden] {
+    display: none;
+  }
+
+  .lets-talk-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 21, 35, 0.72);
+  }
+
+  .lets-talk-modal__dialog {
+    position: relative;
+    width: min(560px, 100%);
+    max-height: min(90vh, 800px);
+    overflow: auto;
+    background: #fff;
+    color: #323232;
+    border-radius: 12px;
+    padding: 2rem 1.5rem 1.5rem;
+  }
+
+  .lets-talk-modal__dialog h2 {
+    margin: 0 0 1rem;
+    font-size: 1.75rem;
+  }
+
+  .lets-talk-modal__close {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    border: 0;
+    background: transparent;
+    font-size: 1.75rem;
+    line-height: 1;
+    cursor: pointer;
+    color: #001523;
+  }
+</style>
+
+<script define:vars={{ hubspotPortalId, hubspotFormId }}>
+  const modal = document.getElementById('letsTalkModal')
+  let formLoaded = false
+
+  function openModal() {
+    if (!modal) return
+    modal.hidden = false
+    document.body.style.overflow = 'hidden'
+    if (!formLoaded) loadHubspotForm()
+  }
+
+  function closeModal() {
+    if (!modal) return
+    modal.hidden = true
+    document.body.style.overflow = ''
+  }
+
+  document.addEventListener('click', (event) => {
+    const target = event.target
+    if (!(target instanceof Element)) return
+
+    if (target.closest('[data-bs-target="#letsTalkModal"], [data-lets-talk]')) {
+      event.preventDefault()
+      openModal()
+      return
+    }
+
+    if (target.closest('[data-lets-talk-close]')) {
+      closeModal()
+    }
+  })
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeModal()
+  })
+
+  function loadHubspotForm() {
+    if (typeof hbspt === 'undefined') {
+      const script = document.createElement('script')
+      script.src = 'https://js.hsforms.net/forms/embed/v2.js'
+      script.onload = createForm
+      document.head.appendChild(script)
+    } else {
+      createForm()
+    }
+  }
+
+  function createForm() {
+    const container = document.getElementById('lets-talk-hubspot-form')
+    if (!container || typeof hbspt === 'undefined' || formLoaded) return
+    formLoaded = true
+    container.innerHTML = ''
+    hbspt.forms.create({
+      region: 'na1',
+      portalId: hubspotPortalId,
+      formId: hubspotFormId,
+      target: '#lets-talk-hubspot-form',
+      css: '',
+      cssRequired: '',
+    })
+  }
+</script>

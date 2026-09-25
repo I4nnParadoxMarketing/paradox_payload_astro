@@ -1,0 +1,69 @@
+---
+interface RecentInsight {
+  title: string
+  url: string
+  date?: string
+}
+
+interface Props {
+  title?: string
+  subtitle?: string
+  dateLabel?: string
+  imageUrl?: string
+  bodyHtml?: string
+  capabilityLabel?: string
+  capabilityUrl?: string
+  recentInsights?: RecentInsight[]
+}
+
+const {
+  title = '',
+  subtitle = '',
+  dateLabel = '',
+  imageUrl = '',
+  bodyHtml = '',
+  capabilityLabel = '',
+  capabilityUrl = '',
+  recentInsights = [],
+} = Astro.props
+---
+
+<article class="post-content">
+  <div class="container insight-layout">
+    <div class="article-content">
+      <h1 class="article-title">{title}</h1>
+      {subtitle && <p class="article-excerpt">{subtitle}</p>}
+      {(dateLabel || capabilityLabel) && (
+        <div class="post-meta">
+          <ul>
+            {dateLabel && <li>{dateLabel}</li>}
+            {capabilityLabel && (
+              <li>
+                {capabilityUrl ? <a href={capabilityUrl}>{capabilityLabel}</a> : capabilityLabel}
+              </li>
+            )}
+          </ul>
+        </div>
+      )}
+      {imageUrl && (
+        <div class="post-thumbnail">
+          <img src={imageUrl} alt="" />
+        </div>
+      )}
+      {bodyHtml && <div class="article-body" set:html={bodyHtml} />}
+    </div>
+    <aside class="insight-sidebar">
+      <div class="recent-posts-widget">
+        <h2 class="sidebar-heading">Recent insights</h2>
+        <ul>
+          {recentInsights.map((item) => (
+            <li>
+              <a href={item.url}>{item.title}</a>
+              {item.date && <span class="recent-date">{item.date}</span>}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </aside>
+  </div>
+</article>

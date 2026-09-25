@@ -1,0 +1,25 @@
+---
+interface Props {
+  title?: string
+  subtitle?: string
+  imageUrl?: string
+  bodyHtml?: string
+  eyebrow?: string
+}
+
+const { title = '', subtitle = '', imageUrl = '', bodyHtml = '', eyebrow = '' } = Astro.props
+---
+
+<article class="post-content">
+  <div class="container article-content">
+    {eyebrow && <p class="rich-content__eyebrow">{eyebrow}</p>}
+    <h1 class="article-title">{title}</h1>
+    {subtitle && <p class="article-excerpt">{subtitle}</p>}
+    {imageUrl && (
+      <div class="article-hero-image post-thumbnail">
+        <img src={imageUrl} alt="" />
+      </div>
+    )}
+    {bodyHtml && <div class="article-body" set:html={bodyHtml} />}
+  </div>
+</article>
