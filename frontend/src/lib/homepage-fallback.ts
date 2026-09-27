@@ -145,7 +145,7 @@ export const homepageFallback: Page = {
       rows: [
         { label: 'Website', color: '#EFB155', logos: ['https://paradoxmarketing.io/wp-content/uploads/2026/03/wp-1.png', 'https://paradoxmarketing.io/wp-content/uploads/2026/03/woocommerce-1.png', 'https://paradoxmarketing.io/wp-content/uploads/2026/03/webflow-1.png', 'https://paradoxmarketing.io/wp-content/uploads/2026/03/shopify-1.png', 'https://paradoxmarketing.io/wp-content/uploads/2026/03/bigcommerce-1.png'] },
         { label: 'Advertising', color: '#80CBE2', logos: ['https://paradoxmarketing.io/wp-content/uploads/2026/06/google-ads.webp', 'https://paradoxmarketing.io/wp-content/uploads/2026/06/linked-in-ads-1.webp', 'https://paradoxmarketing.io/wp-content/uploads/2026/06/bing-ads.webp', 'https://paradoxmarketing.io/wp-content/uploads/2026/06/meta.webp', 'https://paradoxmarketing.io/wp-content/uploads/2026/03/reddit-ads.png'] },
-        { label: 'CRM', color: '#2F77B5', logos: ['https://paradoxmarketing.io/wp-content/uploads/2026/03/hubspot-1.png', 'https://paradoxmarketing.io/wp-content/uploads/2026/03/salesforce-1.png', 'https://paradoxmarketing.io/wp-content/uploads/2026/03/zoho-1.png', 'https://paradoxmarketing.io/wp-content/uploads/2026/03/pipedrive-1.png', 'https://paradoxmarketing.io/wp-content/uploads/2026/03/activecampaign-1.png'] },
+        { label: 'CRM', color: '#2F77B5', logos: ['https://paradoxmarketing.io/wp-content/uploads/2026/06/HubSpot.webp', 'https://paradoxmarketing.io/wp-content/uploads/2026/06/ontraport-logo.webp', 'https://paradoxmarketing.io/wp-content/uploads/2026/03/salesforce.png', 'https://paradoxmarketing.io/wp-content/uploads/2026/06/pipedrive.webp', 'https://paradoxmarketing.io/wp-content/uploads/2026/06/Active-Campaign.webp'] },
       ],
     },
     {

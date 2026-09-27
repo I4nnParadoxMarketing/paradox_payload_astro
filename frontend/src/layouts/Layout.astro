@@ -1,6 +1,7 @@
 ---
 import '../styles/paradox.css'
 import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
 import LetsTalkModal from '../components/LetsTalkModal.astro'
 
 interface Props {
@@ -30,18 +31,7 @@ const {
     <main id="content">
       <slot />
     </main>
-    <footer class="site-footer">
-      <div class="container footer-inner">
-        <img
-          class="footer-logo"
-          src="https://paradoxmarketing.io/wp-content/uploads/2026/03/footer-logo.png"
-          alt="Paradox Marketing"
-          width="200"
-          height="50"
-        />
-        <p>&copy; {new Date().getFullYear()} Paradox Marketing. All rights reserved.</p>
-      </div>
-    </footer>
+    <Footer />
     <LetsTalkModal />
   </body>
 </html>

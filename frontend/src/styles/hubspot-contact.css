@@ -1,13 +1,13 @@
 /* Prevent HubSpot embed styles from leaking to site chrome */
 .site-header img,
-.site-footer img {
+.main-footer img {
   width: auto;
   max-width: none;
 }
 
-.site-footer .footer-logo {
+.main-footer .footer-logo {
   width: 200px !important;
-  max-width: 200px !important;
+  max-width: 240px !important;
   height: auto !important;
 }
 
